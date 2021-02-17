@@ -1,7 +1,5 @@
 package GeneralComponents;
 
-import ContextFreeGrammar.NonTerminalSymbol;
-
 import java.util.List;
 
 public class AbstractProduction<T> {
