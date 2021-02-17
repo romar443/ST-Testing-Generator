@@ -2,13 +2,13 @@ package ContextFreeGrammar;
 
 public class StartSymbol{
 
-    private NonTerminalSymbol startSymbol;
+    private CFGNonTerminalSymbol startSymbol;
 
-    public StartSymbol(NonTerminalSymbol startObject){
+    public StartSymbol(CFGNonTerminalSymbol startObject){
         this.startSymbol = startObject;
     }
 
-    public NonTerminalSymbol getStartSymbol(){
+    public CFGNonTerminalSymbol getStartSymbol(){
         return this.startSymbol;
     }
 }
