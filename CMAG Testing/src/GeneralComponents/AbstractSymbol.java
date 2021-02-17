@@ -4,7 +4,7 @@ import ContextFreeGrammar.StartSymbol;
 
 import java.util.List;
 
-public class AbstractSymbol<T> {
+public abstract class AbstractSymbol<T> {
     /**
      * The underlying object. Can be an instance of the {@linkplain StartSymbol}, a <b>letter</b> of the <b>alphabet</b> or a <b>sentence</b>
      */
