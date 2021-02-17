@@ -5,12 +5,17 @@ import GeneralComponents.BinaryOperation;
 public class Constraint {
 
     private BooleanBinaryOperation operation;
+    private Attribute leftsideAttribute;
+    private Attribute rightsideAttribute;
 
-    public Constraint (BooleanBinaryOperation booleanBinaryOperation){
+
+    public Constraint (CMAGSymbol leftSymbol, String leftSymbolAttributeName, BooleanBinaryOperation booleanBinaryOperation, CMAGSymbol rightSymbol, String rightSymbolAttributeName){
         this.operation = booleanBinaryOperation;
+        this.leftsideAttribute = leftSymbol.getAttributeWithName(leftSymbolAttributeName);
+        this.rightsideAttribute = rightSymbol.getAttributeWithName(rightSymbolAttributeName);;
     }
 
-    public Boolean getSatisfied(Attribute leftside, Attribute rightside){
-        return operation.getResult(leftside, rightside).getValue();
+    public Boolean getSatisfied(){
+        return operation.getResult(leftsideAttribute, rightsideAttribute).getValue();
     }
 }
