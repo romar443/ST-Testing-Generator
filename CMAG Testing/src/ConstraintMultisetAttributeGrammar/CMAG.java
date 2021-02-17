@@ -12,7 +12,7 @@ public class CMAG extends CFG {
     private List<Constraint> constraints;
 
 
-    public CMAG(List<TerminalSymbol> terminalSymbols, List<NonTerminalSymbol> nonTerminalSymbols, StartSymbol startSymbol, List<AbstractProduction> productions,
+    public CMAG(List<CFGTerminalSymbol> terminalSymbols, List<CFGNonTerminalSymbol> nonTerminalSymbols, StartSymbol startSymbol, List<AbstractProduction> productions,
                 List<Attribute> attributes, List<AbstractAttributeRule> attributeRules, List<Constraint> constraints) {
 
         super(terminalSymbols, nonTerminalSymbols, startSymbol, productions);

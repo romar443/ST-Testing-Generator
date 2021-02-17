@@ -1,20 +1,11 @@
 package ConstraintMultisetAttributeGrammar;
 
-import ContextFreeGrammar.TerminalSymbol;
+import ContextFreeGrammar.CFGTerminalSymbol;
 
 import java.util.List;
 
-public class CMAGTerminal extends TerminalSymbol {
-
-    private final List<Attribute> attributes;
-
+public class CMAGTerminal extends CMAGSymbol {
     public CMAGTerminal(Object object, List<Attribute> attributes) {
-        super(object);
-        this.attributes = attributes;
+        super(object, attributes);
     }
-
-    public List<Attribute> getAttributes() {
-        return attributes;
-    }
-
 }

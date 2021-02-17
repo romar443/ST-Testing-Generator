@@ -1,24 +1,12 @@
 package ConstraintMultisetAttributeGrammar;
 
-import ContextFreeGrammar.NonTerminalSymbol;
+import ContextFreeGrammar.CFGNonTerminalSymbol;
 import java.util.List;
 
 
-public class CMAGNonTerminal extends NonTerminalSymbol {
-
-    private final List<Attribute> attributes;
+public class CMAGNonTerminal extends CMAGSymbol {
 
     public CMAGNonTerminal(Object object, List<Attribute> attributes) {
-        super(object);
-        this.attributes = attributes;
+        super(object, attributes);
     }
-
-    public List<Attribute> getAttributes() {
-        return attributes;
-    }
-
-    public Attribute getAttributeAtPosition(int position){
-        return attributes.get(position);
-    }
-
 }
