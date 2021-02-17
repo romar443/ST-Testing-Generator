@@ -6,13 +6,13 @@ import java.util.List;
 
 public class CFG {
 
-    private List<TerminalSymbol> terminalSymbols;
-    private List<NonTerminalSymbol> nonTerminalSymbols;
+    private List<CFGTerminalSymbol> terminalSymbols;
+    private List<CFGNonTerminalSymbol> nonTerminalSymbols;
     private StartSymbol startSymbol;
     private List<AbstractProduction> productions;
 
 
-    public CFG(List<TerminalSymbol> terminalSymbols, List<NonTerminalSymbol> nonTerminalSymbols,
+    public CFG(List<CFGTerminalSymbol> terminalSymbols, List<CFGNonTerminalSymbol> nonTerminalSymbols,
                StartSymbol startSymbol, List<AbstractProduction> productions){
 
         this.terminalSymbols = terminalSymbols;

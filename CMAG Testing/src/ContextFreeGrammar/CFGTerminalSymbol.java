@@ -2,11 +2,10 @@ package ContextFreeGrammar;
 
 import GeneralComponents.AbstractSymbol;
 
-public class NonTerminalSymbol extends AbstractSymbol {
+public class CFGTerminalSymbol extends AbstractSymbol {
 
-    public NonTerminalSymbol(Object object) {
+    public CFGTerminalSymbol(Object object) {
         super(object);
     }
 
 }
-
