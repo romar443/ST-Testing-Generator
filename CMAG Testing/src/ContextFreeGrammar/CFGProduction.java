@@ -1,6 +1,5 @@
 package ContextFreeGrammar;
 
-import ConstraintMultisetAttributeGrammar.CMAGNonTerminalSymbol;
 import ConstraintMultisetAttributeGrammar.CMAGProduction;
 import GeneralComponents.AbstractProduction;
 import GeneralComponents.AbstractSymbol;
@@ -11,13 +10,7 @@ import java.util.List;
 public class CFGProduction extends AbstractProduction {
 
     public CFGProduction(AbstractSymbol ruleHead, List<AbstractSymbol> ruleBody){
-
         super(ruleHead, ruleBody);
-
-        //Rule head must be a NonTerminalSymbol in context-free grammars
-//        if(!(ruleHead instanceof CFGNonTerminalSymbol)){
-//            throw new IllegalStateException();
-//        }
     }
 
     @Override
@@ -45,11 +38,17 @@ public class CFGProduction extends AbstractProduction {
 
     /**
      * The core of the class. Returns wether the production is applicable.
-     * @param nonTerminal The {@linkplain CMAGNonTerminalSymbol} symbol to be replaced by the production
+     * @param nonTerminal The {@linkplain CFGNonTerminalSymbol} symbol to be replaced by the production
      * @return Boolean, answers wether the {@linkplain CMAGProduction} can be applied
      */
     @Override
     public Boolean applicable(AbstractSymbol nonTerminal) {
+
+        //Rule head must be a NonTerminalSymbol in context-free grammars
+        if(!(getRuleHead() instanceof CFGNonTerminalSymbol)){
+            throw new IllegalStateException("Head of rule is NOT a CFGNonTerminalSymbol, as required by CFG Grammars");
+        }
+
         return (nonTerminal.equals(getRuleHead()));
     }
 

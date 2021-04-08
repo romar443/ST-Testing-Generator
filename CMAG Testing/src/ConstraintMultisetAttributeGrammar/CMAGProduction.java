@@ -17,11 +17,7 @@ public class CMAGProduction extends CFGProduction {
     public CMAGProduction(AbstractSymbol ruleHead, List<AbstractSymbol> ruleBody,
                           List<Constraint> constraints, List<AttributeRule> attributeRules) {
 
-
         super(ruleHead, ruleBody);
-        if(!(ruleHead instanceof CMAGNonTerminalSymbol)){
-            throw new IllegalStateException();
-        }
         this.listOfConstraints = constraints;
         this.listOfAttributeRules = attributeRules;
     }
@@ -33,6 +29,11 @@ public class CMAGProduction extends CFGProduction {
      */
     @Override
     public Boolean applicable (AbstractSymbol nonTerminal){
+
+        if(!(getRuleHead() instanceof CMAGNonTerminalSymbol)){
+            throw new IllegalStateException("Head of rule is NOT a CMAGNonTerminalSymbol, as required by all subclasses of CFG Grammars");
+        }
+
         if (!nonTerminal.equals(getRuleHead())) {
             return false;
         } else {
@@ -43,7 +44,6 @@ public class CMAGProduction extends CFGProduction {
             }
             return true;
         }
-
     }
 
     @Override
