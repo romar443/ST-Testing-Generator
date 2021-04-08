@@ -1,12 +1,13 @@
 package ConstraintMultisetAttributeGrammar;
 
+import ContextFreeGrammar.CFGSymbol;
 import GeneralComponents.AbstractSymbol;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public abstract class CMAGSymbol extends AbstractSymbol {
+public abstract class CMAGSymbol extends CFGSymbol {
 
     private final List<Attribute> attributes;
 
