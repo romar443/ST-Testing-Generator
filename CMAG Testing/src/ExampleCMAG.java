@@ -66,8 +66,13 @@ public class ExampleCMAG {
         List<Constraint> constraints2 = Arrays.asList(c1);
         CMAGProduction p2 = new CMAGProduction(NT1, ruleBody2, constraints2, attributeRules2);
 
+
+
+
+        //Apply the production
         p1.applyProduction(NT1);
 
+        //Check the value within the attribute ( 2 * sum + 1 )
         System.out.println(NT1.getAttributeWithName("sum").getValue());
     }
 }
