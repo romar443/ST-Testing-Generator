@@ -1,27 +1,23 @@
 package GeneralComponents;
 
 import ConstraintMultisetAttributeGrammar.Attribute;
-
-import java.util.function.BiFunction;
+import GeneralComponents.Operators.AbstractBooleanOperator;
 
 public class BinaryOperation<T extends Attribute,U extends Attribute,R extends Attribute> {
 
-    BiFunction<T,U,R> operation;
+    private Attribute a1;
+    private Attribute a2;
 
-    public BinaryOperation(BiFunction<T,U,R> operation){
-        this.operation = operation;
+    public BinaryOperation(Attribute a1, Attribute a2){
+        this.a1 = a1;
+        this.a2 = a2;
     }
 
-     /**
-     * Abstract BinaryOperation. Result cast to Boolean, so lambda function must be of a boolean form
-     * @param a1 Left hand side of the function. Of type {@linkplain Attribute}
-     * @param a2 Right hand side of the function. Of type {@linkplain Attribute}
-     * @return Boolean
-     */
-    public R getResult(T a1, U a2) {
-        return operation.apply(a1, a2);
+    public Boolean BooleanResult(AbstractBooleanOperator operator){
+        return operator.getResult(a1, a2);
     }
 
+    
 
 }
 

@@ -8,12 +8,12 @@ import java.util.List;
 public class CMAG extends CFG {
 
     private List<Attribute> attributes;
-    private List<AbstractAttributeRule> attributeRules;
+    private List<AttributeRule> attributeRules;
     private List<Constraint> constraints;
 
 
     public CMAG(List<CFGTerminalSymbol> terminalSymbols, List<CFGNonTerminalSymbol> nonTerminalSymbols, StartSymbol startSymbol, List<AbstractProduction> productions,
-                List<Attribute> attributes, List<AbstractAttributeRule> attributeRules, List<Constraint> constraints) {
+                List<Attribute> attributes, List<AttributeRule> attributeRules, List<Constraint> constraints) {
 
         super(terminalSymbols, nonTerminalSymbols, startSymbol, productions);
         this.attributes = attributes;
@@ -25,7 +25,7 @@ public class CMAG extends CFG {
         return attributes;
     }
 
-    public List<AbstractAttributeRule> getAttributeRules() {
+    public List<AttributeRule> getAttributeRules() {
         return attributeRules;
     }
 

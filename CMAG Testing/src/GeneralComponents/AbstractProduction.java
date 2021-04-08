@@ -2,22 +2,30 @@ package GeneralComponents;
 
 import java.util.List;
 
-public class AbstractProduction<T> {
+public abstract class AbstractProduction {
 
-    private T ruleHead;
+    private AbstractSymbol ruleHead;
 
-    private List<T> ruleBody;
+    private List<AbstractSymbol> ruleBody;
 
-    public AbstractProduction(T ruleHead, List<T> ruleBody){
+    public AbstractProduction(AbstractSymbol ruleHead, List<AbstractSymbol> ruleBody){
         this.ruleHead = ruleHead;
         this.ruleBody = ruleBody;
     }
 
-    public T getRuleHead() {
+    public AbstractSymbol getRuleHead() {
         return ruleHead;
     }
 
-    public List<T> getRuleBody() {
+    public List<AbstractSymbol> getRuleBody() {
         return ruleBody;
     }
+
+    public AbstractSymbol getRuleBodySymbol(int position){
+        return getRuleBody().get(position);
+    }
+
+    public abstract List<AbstractSymbol> applyProduction(AbstractSymbol nonTerminal) throws Exception;
+
+    public abstract Boolean applicable(AbstractSymbol nonTerminal);
 }

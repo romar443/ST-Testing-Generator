@@ -2,6 +2,8 @@ package ConstraintMultisetAttributeGrammar;
 
 import GeneralComponents.AbstractSymbol;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public abstract class CMAGSymbol extends AbstractSymbol {
@@ -12,6 +14,13 @@ public abstract class CMAGSymbol extends AbstractSymbol {
         super(object);
         this.attributes = attributes;
     }
+
+    public CMAGSymbol(Object object, Attribute attribute) {
+        super(object);
+        this.attributes = Arrays.asList(attribute);
+    }
+
+
 
     public List<Attribute> getAttributes() {
         return attributes;
@@ -29,6 +38,8 @@ public abstract class CMAGSymbol extends AbstractSymbol {
         }
         return null;
     }
+
+
 }
 
 

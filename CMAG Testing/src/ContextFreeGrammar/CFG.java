@@ -20,5 +20,4 @@ public class CFG {
         this.startSymbol = startSymbol;
         this.productions = productions;
     }
-
 }
