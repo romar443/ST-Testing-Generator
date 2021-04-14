@@ -1,6 +1,5 @@
 package ConstraintMultisetAttributeGrammar;
 
-import GeneralComponents.BinaryOperation;
 import GeneralComponents.Operators.AbstractBooleanOperator;
 
 import java.util.Objects;

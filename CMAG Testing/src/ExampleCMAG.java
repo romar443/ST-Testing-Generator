@@ -71,8 +71,9 @@ public class ExampleCMAG {
 
         //Apply the production
         p1.applyProduction(NT1);
+        for (AbstractSymbol a : p2.applyProduction(NT1)){
+            System.out.println(a);
+        }
 
-        //Check the value within the attribute ( 2 * sum + 1 )
-        System.out.println(NT1.getAttributeWithName("sum").getValue());
     }
 }
