@@ -7,12 +7,21 @@ import GeneralComponents.AbstractSymbol;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implementation of a grammar production for CFG's. The ruleHead must be a non-terminal symbol, as defined by CFG's.
+ */
 public class CFGProduction extends AbstractProduction {
 
     public CFGProduction(AbstractSymbol ruleHead, List<AbstractSymbol> ruleBody){
         super(ruleHead, ruleBody);
     }
 
+    /**
+     * <p>Core functionality of the class. Applies the production to the {@linkplain CFGNonTerminalSymbol} passed as an argument </p>
+     * @param nonTerminal The {@linkplain CFGNonTerminalSymbol} passed as the ruleHead argument
+     * @return The ruleBody
+     * @throws Exception If the production is not {@linkplain #applicable(AbstractSymbol)}
+     */
     @Override
     public List<AbstractSymbol> applyProduction(AbstractSymbol nonTerminal) throws Exception {
         if(applicable(nonTerminal)){
@@ -37,9 +46,9 @@ public class CFGProduction extends AbstractProduction {
     }
 
     /**
-     * The core of the class. Returns wether the production is applicable.
+     * Returns whether the production is applicable.
      * @param nonTerminal The {@linkplain CFGNonTerminalSymbol} symbol to be replaced by the production
-     * @return Boolean, answers wether the {@linkplain CMAGProduction} can be applied
+     * @return Boolean, declaring whether the {@linkplain CMAGProduction} can be applied
      */
     @Override
     public Boolean applicable(AbstractSymbol nonTerminal) {

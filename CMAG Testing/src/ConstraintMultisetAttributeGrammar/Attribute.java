@@ -3,7 +3,7 @@ package ConstraintMultisetAttributeGrammar;
 import java.util.Comparator;
 
 /**
- * A generic attribute, which in formal grammar theory, is either of the type synthesised or inherited
+ * A generic attribute, which in formal grammar theory, is either of the type synthesised or inherited.
  * @param <T>
  */
 public class Attribute<T> {
