@@ -1,5 +1,8 @@
 package ConstraintMultisetAttributeGrammar;
 
+/**
+ * The StartSymbol of a CMAG
+ */
 public class CMAGStartSymbol {
 
     private CMAGNonTerminalSymbol startSymbol;

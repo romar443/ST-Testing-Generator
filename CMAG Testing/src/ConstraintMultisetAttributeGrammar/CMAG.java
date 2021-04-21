@@ -5,6 +5,10 @@ import GeneralComponents.AbstractProduction;
 
 import java.util.List;
 
+/**
+ * The grammar as a whole, adhering to all definitions of CMAG's except for the exclusion of synthesised attributes.
+ * Extensible in the future to provide for generation.
+ */
 public class CMAG extends CFG {
 
     private List<Attribute> attributes;

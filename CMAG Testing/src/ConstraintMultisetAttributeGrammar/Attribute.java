@@ -3,8 +3,9 @@ package ConstraintMultisetAttributeGrammar;
 import java.util.Comparator;
 
 /**
- * A generic attribute, which in formal grammar theory, is either of the type synthesised or inherited.
- * @param <T>
+ * Attributes are a defining aspect of CMAG's, alongside the concept of {@linkplain Constraint}s, which differentiate CMAG's from CFG's.
+ * A generic attribute, which in formal grammar theory is either of the type synthesised or inherited.
+ * @param <T> Generic of type T
  */
 public class Attribute<T> {
 

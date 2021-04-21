@@ -8,12 +8,22 @@ import GeneralComponents.AbstractSymbol;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implementation of a grammar production for CMAG's. The ruleHead must be a non-terminal symbol, as defined by CMAG's. Replaces the ruleHead with the ruleBody
+ */
 public class CMAGProduction extends CFGProduction {
 
     private final List<Constraint> listOfConstraints;
     private final List<AttributeRule> listOfAttributeRules;
 
 
+    /**
+     * Constructor
+     * @param ruleHead A {@linkplain CMAGNonTerminalSymbol} as defined for CMAG's
+     * @param ruleBody A list of {@linkplain CMAGNonTerminalSymbol}s and {@linkplain CMAGTerminalSymbol}s, returned when the production is applied
+     * @param constraints A list of constraints which must be fulfilled in order to apply the production
+     * @param attributeRules A list of attributeRules to be executed when the production is applied
+     */
     public CMAGProduction(AbstractSymbol ruleHead, List<AbstractSymbol> ruleBody,
                           List<Constraint> constraints, List<AttributeRule> attributeRules) {
 
@@ -46,6 +56,12 @@ public class CMAGProduction extends CFGProduction {
         }
     }
 
+    /**
+     * Applies the production to the supplied {@linkplain CFGNonTerminalSymbol}, executing all {@linkplain AttributeRule}s and checking all {@linkplain Constraint}s
+     * @param nonTerminal The {@linkplain CFGNonTerminalSymbol} passed as the ruleHead argument
+     * @return The {@linkplain #getRuleBody()}
+     * @throws Exception Thrown when not all constraints are fulfilled, meaning the production is not applicable
+     */
     @Override
     public List<AbstractSymbol> applyProduction(AbstractSymbol nonTerminal) throws Exception {
 
