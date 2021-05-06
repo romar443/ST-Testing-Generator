@@ -36,7 +36,7 @@ public class AttributeRule {
     /**
      * Some {@linkplain Attribute}, which has some constant stored at its {@linkplain Attribute#getValue()}
      */
-    private Attribute constant;
+    private Object constant;
     /**
      * Flag used to indicate whether an assignment or operation is to take place.
      */
@@ -60,6 +60,7 @@ public class AttributeRule {
         this.assignee = assignee;
     }
 
+
     /**
      * Constructor serving to allow operations to be executed upon some {@linkplain Attribute}s value, using predefined {@linkplain Attribute}s with constant values
      * to perform the operation
@@ -69,12 +70,14 @@ public class AttributeRule {
      * @param assigneeAttributeName The {@linkplain CMAGSymbol} to which the {@linkplain Attribute} and its corresponding value is assigned to
      * @param assignee The name of the {@linkplain Attribute} TO which the value is assigned
      */
-    public AttributeRule (Attribute constant, AbstractOperator operation, String assigneeAttributeName, CMAGSymbol assignee){
+    public AttributeRule (Object constant, AbstractOperator operation, String assigneeAttributeName, CMAGSymbol assignee){
         this.operation = operation;
         this.constant = constant;
         this.assignee = assignee;
         this.assigneeAttributeName = assigneeAttributeName;
     }
+
+
 
 
     /**
@@ -92,7 +95,8 @@ public class AttributeRule {
         }
 
         //In the case that an operation is set, return the assignee symbol, with a new value in the given attribute
-        assignee.getAttributeWithName(assigneeAttributeName).setValue(operation.getResult(constant, assignee.getAttributeWithName(assigneeAttributeName)));
+        Attribute attributePlaceholder = new Attribute(constant, "constant");
+        assignee.getAttributeWithName(assigneeAttributeName).setValue(operation.getResult(attributePlaceholder, assignee.getAttributeWithName(assigneeAttributeName)));
         return assignee;
     }
 

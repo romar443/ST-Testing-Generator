@@ -12,8 +12,8 @@ public class Attribute<T> {
     private T value;
     private String name;
 
-    public Attribute(T object, String name){
-        this.value = object;
+    public Attribute(T value, String name){
+        this.value = value;
         this.name = name;
     }
 

@@ -31,10 +31,10 @@ public class CFGProduction extends AbstractProduction {
 
             for (AbstractSymbol ar : getRuleBody()){
                 if (ar instanceof CFGTerminalSymbol){
-                    copyOfRuleBody.add(new CFGTerminalSymbol(ar.getObject()));
+                    copyOfRuleBody.add(new CFGTerminalSymbol(ar.getObject(), ar.getId()));
                 }
                 else {
-                    copyOfRuleBody.add(new CFGNonTerminalSymbol(ar.getObject()));
+                    copyOfRuleBody.add(new CFGNonTerminalSymbol(ar.getObject(), ar.getId()));
                 }
             }
 

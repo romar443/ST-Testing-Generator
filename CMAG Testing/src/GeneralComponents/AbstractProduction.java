@@ -37,7 +37,7 @@ public abstract class AbstractProduction {
      * tested for in {@linkplain AbstractProduction#applicable(AbstractSymbol)}</p>
      * @param symbol Some {@linkplain AbstractSymbol}
      * @return The {@linkplain #ruleBody}
-     * @Exception When the production is not applicable, an exception is thrown
+     * @throws Exception When the production is not applicable, an exception is thrown
      */
     public abstract List<AbstractSymbol> applyProduction(AbstractSymbol symbol) throws Exception;
 

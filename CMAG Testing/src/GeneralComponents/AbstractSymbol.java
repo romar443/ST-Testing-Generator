@@ -3,10 +3,11 @@ package GeneralComponents;
 import ContextFreeGrammar.StartSymbol;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * An abstract representation of a grammar symbol.
- * @param <T>
+ * @param <T> Generic of type T
  */
 public abstract class AbstractSymbol<T> {
     /**
@@ -15,11 +16,23 @@ public abstract class AbstractSymbol<T> {
     private final T object;
 
     /**
+     * The id needed to retrieve the same symbol. Copies are created in productions, so that attributes may be changed, without altering
+     * the states of other copies of the same symbol
+     */
+    private UUID id;
+
+    /**
      * Constructor
      * @param object {{@link #object}}
      */
     public AbstractSymbol(T object){
         this.object = object;
+        this.id = UUID.randomUUID();
+    }
+
+    public AbstractSymbol(T object, UUID id){
+        this.object = object;
+        this.id = id;
     }
 
     /**
@@ -29,5 +42,15 @@ public abstract class AbstractSymbol<T> {
     public T getObject(){
         return this.object;
     }
+
+    /**
+     * Getter
+     * @return {{@link #id}}
+     */
+    public UUID getId(){
+        return this.id;
+    }
+
+
 
 }

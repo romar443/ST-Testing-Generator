@@ -18,7 +18,7 @@ public class Constraint {
     private AbstractBooleanOperator operator;
     private Attribute leftsideAttribute;
     private Attribute rightsideAttribute;
-    private Attribute constant;
+    private Object constant;
     /**
      * Used to indicate whether to perform the operation on two {@linkplain Attribute}s, or on some {@linkplain Attribute} and a {@linkplain #constant} value
      */
@@ -47,7 +47,7 @@ public class Constraint {
      * @param booleanOperator The concrete instance of a {@linkplain AbstractBooleanOperator} e.g. {@linkplain GeneralComponents.Operators.BooleanOperators.GreaterThan}
      * @param constant The value of the predefined constant {@linkplain Attribute}
      */
-    public Constraint (CMAGSymbol leftSymbol, String leftSymbolAttributeName, AbstractBooleanOperator booleanOperator, Attribute constant){
+    public Constraint (CMAGSymbol leftSymbol, String leftSymbolAttributeName, AbstractBooleanOperator booleanOperator, Object constant){
         this.operator = booleanOperator;
         this.leftsideAttribute = leftSymbol.getAttributeWithName(leftSymbolAttributeName);
         this.constant = constant;
@@ -62,6 +62,7 @@ public class Constraint {
         if(Objects.equals(constantFlag, false)){
             return operator.getResult(leftsideAttribute, rightsideAttribute);
         }
-        return operator.getResult(leftsideAttribute, constant);
+        Attribute attributePlaceholder = new Attribute(constant, "constant");
+        return operator.getResult(leftsideAttribute, attributePlaceholder);
     }
 }

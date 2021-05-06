@@ -6,6 +6,7 @@ import GeneralComponents.AbstractSymbol;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Extension of a {@linkplain CFGSymbol} with the addition of containing a set of {@linkplain Attribute}s
@@ -32,6 +33,17 @@ public abstract class CMAGSymbol extends CFGSymbol {
     public CMAGSymbol(Object object, Attribute attribute) {
         super(object);
         this.attributes = Arrays.asList(attribute);
+    }
+
+    /**
+     * Constructor for multiple {@linkplain Attribute}s
+     * @param object The object behind the Symbol
+     * @param attributes The set of {@linkplain Attribute}s belonging to the symbol
+     * @param id The id (signature of the symbol)
+     */
+    public CMAGSymbol(Object object, List<Attribute> attributes, UUID id) {
+        super(object, id);
+        this.attributes = attributes;
     }
 
 

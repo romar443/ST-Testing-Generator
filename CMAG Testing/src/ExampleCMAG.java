@@ -13,6 +13,9 @@ import java.util.List;
 
 public class ExampleCMAG {
 
+    public ExampleCMAG() {
+    }
+
     public static void main(String[] args) throws Exception {
 
         //Initial Attribute Values
@@ -23,11 +26,6 @@ public class ExampleCMAG {
 
         //Attributes
         Attribute sum = new Attribute(startvalue, "sum");
-
-        //Constant Attributes
-        Attribute multiplier = new Attribute(two, "two");
-        Attribute additive = new Attribute(one, "one");
-        Attribute cap = new Attribute(oneHundred, "oneHundred");
 
 
 
@@ -44,13 +42,13 @@ public class ExampleCMAG {
 
         //Constraints
         // (NT1.sum < 100)
-        Constraint c1 = new Constraint(NT1, "sum", new SmallerThan(), cap);
+        Constraint c1 = new Constraint(NT1, "sum", new SmallerThan(), oneHundred);
 
         //Attribute Rules
         // (2 x NT1.sum)
-        AttributeRule mutliply = new AttributeRule(multiplier, new Multiplication(), "sum", NT1);
+        AttributeRule mutliply = new AttributeRule(two, new Multiplication(), "sum", NT1);
         // (NT1.sum + 1)
-        AttributeRule add = new AttributeRule(additive, new Addition(), "sum", NT1);
+        AttributeRule add = new AttributeRule(one, new Addition(), "sum", NT1);
         // (NT1.sum -> T1.sum)
         AttributeRule assign = new AttributeRule(NT1, "sum", "sum", T1);
 
@@ -70,10 +68,19 @@ public class ExampleCMAG {
 
 
         //Apply the production
-        p1.applyProduction(NT1);
-        for (AbstractSymbol a : p2.applyProduction(NT1)){
+        List list1 = p1.applyProduction(NT1);
+
+        for(Object a : list1){
             System.out.println(a);
+            System.out.println("First prod: " + ((CMAGSymbol) a).getAttributeWithName("sum").getValue());
         }
+
+        List list2 = p2.applyProduction((CMAGNonTerminalSymbol) list1.get(0));
+
+        for(Object a : list2){
+            System.out.println("Second prod" + ((CMAGSymbol) a).getAttributeWithName("sum").getValue());
+        }
+
 
     }
 }

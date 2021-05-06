@@ -45,6 +45,7 @@ public class CMAGProduction extends CFGProduction {
         }
 
         if (!nonTerminal.equals(getRuleHead())) {
+            //Add typing to symbols so production can be applied to symbols that are the same
             return false;
         } else {
             for(Constraint c : listOfConstraints){
@@ -68,21 +69,32 @@ public class CMAGProduction extends CFGProduction {
         //If the all constraints are met
         if(applicable(nonTerminal)){
 
+            //Introduce a copy of the objects in the rule body, so new attributes may be assigned without altering the attributes from symbols in previous productions
+            List<AbstractSymbol> copyOfRuleBody = new ArrayList<>();
+
+            for (AbstractSymbol ar : getRuleBody()){
+
+
+                //List which will contain new attributes
+                List listOfDuplicateAttributes = new ArrayList();
+
+                for (Attribute oldAttribute : ((CMAGTerminalSymbol) ar).getAttributes()){
+                    listOfDuplicateAttributes.add(new Attribute(oldAttribute.getValue(), oldAttribute.getName()));
+                }
+
+                if (ar instanceof CMAGTerminalSymbol){
+                    copyOfRuleBody.add( new CMAGTerminalSymbol ( ar.getObject(), listOfDuplicateAttributes, ar.getId()));
+                }
+                else {
+                    copyOfRuleBody.add(new CMAGNonTerminalSymbol(ar.getObject(), listOfDuplicateAttributes, ar.getId()));
+                }
+            }
+
             for(AttributeRule ar : listOfAttributeRules){
                 ar.applyRule();
             }
 
-            //Introduce a copy of the objects in the rule body, so that attribute values are not changed in further productions
-            List<AbstractSymbol> copyOfRuleBody = new ArrayList<>();
 
-            for (AbstractSymbol ar : getRuleBody()){
-                if (ar instanceof CMAGTerminalSymbol){
-                    copyOfRuleBody.add(new CMAGTerminalSymbol(ar.getObject(), ((CMAGTerminalSymbol) ar).getAttributes()));
-                }
-                else {
-                    copyOfRuleBody.add(new CMAGNonTerminalSymbol(ar.getObject(), ((CMAGNonTerminalSymbol) ar).getAttributes()));
-                }
-            }
 
             return copyOfRuleBody;
         }
