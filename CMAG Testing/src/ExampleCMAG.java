@@ -67,19 +67,19 @@ public class ExampleCMAG {
 
 
 
-        //Apply the production
-        List list1 = p1.applyProduction(NT1);
-
-        for(Object a : list1){
-            System.out.println(a);
-            System.out.println("First prod: " + ((CMAGSymbol) a).getAttributeWithName("sum").getValue());
-        }
-
-        List list2 = p2.applyProduction((CMAGNonTerminalSymbol) list1.get(0));
-
-        for(Object a : list2){
-            System.out.println("Second prod" + ((CMAGSymbol) a).getAttributeWithName("sum").getValue());
-        }
+//        //Apply the production
+//        List list1 = p1.applyProduction(NT1);
+//
+//        for(Object a : list1){
+//            System.out.println(a);
+//            System.out.println("First prod: " + ((CMAGSymbol) a).getAttributeWithName("sum").getValue());
+//        }
+//
+//        List list2 = p2.applyProduction((CMAGNonTerminalSymbol) list1.get(0));
+//
+//        for(Object a : list2){
+//            System.out.println("Second prod" + ((CMAGSymbol) a).getAttributeWithName("sum").getValue());
+//        }
 
 
     }

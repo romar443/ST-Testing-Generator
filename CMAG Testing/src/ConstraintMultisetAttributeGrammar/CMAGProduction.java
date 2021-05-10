@@ -6,6 +6,7 @@ import ContextFreeGrammar.CFGTerminalSymbol;
 import GeneralComponents.AbstractSymbol;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -33,6 +34,51 @@ public class CMAGProduction extends CFGProduction {
     }
 
     /**
+     * Constructor with single attribute rule
+     * @param ruleHead A {@linkplain CMAGNonTerminalSymbol} as defined for CMAG's
+     * @param ruleBody A list of {@linkplain CMAGNonTerminalSymbol}s and {@linkplain CMAGTerminalSymbol}s, returned when the production is applied
+     * @param constraints A list of constraints which must be fulfilled in order to apply the production
+     * @param attributeRule A single attributeRule to be executed when the production is applied
+     */
+    public CMAGProduction(AbstractSymbol ruleHead, List<AbstractSymbol> ruleBody,
+                          List<Constraint> constraints, AttributeRule attributeRule) {
+
+        super(ruleHead, ruleBody);
+        this.listOfConstraints = constraints;
+        this.listOfAttributeRules = Arrays.asList(attributeRule);
+    }
+
+    /**
+     * Constructor with single constraint
+     * @param ruleHead A {@linkplain CMAGNonTerminalSymbol} as defined for CMAG's
+     * @param ruleBody A list of {@linkplain CMAGNonTerminalSymbol}s and {@linkplain CMAGTerminalSymbol}s, returned when the production is applied
+     * @param constraint A single constraint which must be fulfilled in order to apply the production
+     * @param attributeRules A list of attributeRules to be executed when the production is applied
+     */
+    public CMAGProduction(AbstractSymbol ruleHead, List<AbstractSymbol> ruleBody,
+                          Constraint constraint, List<AttributeRule> attributeRules) {
+
+        super(ruleHead, ruleBody);
+        this.listOfConstraints = Arrays.asList(constraint);
+        this.listOfAttributeRules = attributeRules;
+    }
+
+    /**
+     * Constructor with single constraint
+     * @param ruleHead A {@linkplain CMAGNonTerminalSymbol} as defined for CMAG's
+     * @param ruleBody A list of {@linkplain CMAGNonTerminalSymbol}s and {@linkplain CMAGTerminalSymbol}s, returned when the production is applied
+     * @param constraint A single constraint which must be fulfilled in order to apply the production
+     * @param attributeRule A single attributeRule to be executed when the production is applied
+     */
+    public CMAGProduction(AbstractSymbol ruleHead, List<AbstractSymbol> ruleBody,
+                          Constraint constraint, AttributeRule attributeRule) {
+
+        super(ruleHead, ruleBody);
+        this.listOfConstraints = Arrays.asList(constraint);
+        this.listOfAttributeRules = Arrays.asList(attributeRule);
+    }
+
+    /**
      * The core of the class. Returns whether the production is applicable. I.e. are all {@linkplain Constraint}'s fulfilled
      * @param nonTerminal The {@linkplain CMAGNonTerminalSymbol} symbol to be replaced by the production
      * @return Boolean, can the {@linkplain CMAGProduction} be applied
@@ -40,12 +86,14 @@ public class CMAGProduction extends CFGProduction {
     @Override
     public Boolean applicable (AbstractSymbol nonTerminal){
 
+        //Rulehead must be a Non terminal symbol as defined for all CFG Grammars and their derivations
         if(!(getRuleHead() instanceof CMAGNonTerminalSymbol)){
             throw new IllegalStateException("Head of rule is NOT a CMAGNonTerminalSymbol, as required by all subclasses of CFG Grammars");
         }
 
-        if (!nonTerminal.equals(getRuleHead())) {
-            //Add typing to symbols so production can be applied to symbols that are the same
+        //Checks the id of the symbols to see if they have the same 'signature'. Symbols are duplicated in the production, so the id is used to identify symbols
+        //that are "the same"
+        if (!(getRuleHead().getId() == nonTerminal.getId())) {
             return false;
         } else {
             for(Constraint c : listOfConstraints){
@@ -69,8 +117,15 @@ public class CMAGProduction extends CFGProduction {
         //If the all constraints are met
         if(applicable(nonTerminal)){
 
+            //Apply AttributeRules
+            for(AttributeRule ar : listOfAttributeRules){
+                ar.applyRule();
+            }
+
+
             //Introduce a copy of the objects in the rule body, so new attributes may be assigned without altering the attributes from symbols in previous productions
             List<AbstractSymbol> copyOfRuleBody = new ArrayList<>();
+
 
             for (AbstractSymbol ar : getRuleBody()){
 
@@ -78,20 +133,18 @@ public class CMAGProduction extends CFGProduction {
                 //List which will contain new attributes
                 List listOfDuplicateAttributes = new ArrayList();
 
-                for (Attribute oldAttribute : ((CMAGTerminalSymbol) ar).getAttributes()){
-                    listOfDuplicateAttributes.add(new Attribute(oldAttribute.getValue(), oldAttribute.getName()));
-                }
-
                 if (ar instanceof CMAGTerminalSymbol){
+                    for (Attribute oldAttribute : ((CMAGTerminalSymbol) ar).getAttributes()){
+                        listOfDuplicateAttributes.add(new Attribute(oldAttribute.getValue(), oldAttribute.getName()));
+                    }
                     copyOfRuleBody.add( new CMAGTerminalSymbol ( ar.getObject(), listOfDuplicateAttributes, ar.getId()));
                 }
                 else {
+                    for (Attribute oldAttribute : ((CMAGNonTerminalSymbol) ar).getAttributes()){
+                        listOfDuplicateAttributes.add(new Attribute(oldAttribute.getValue(), oldAttribute.getName()));
+                    }
                     copyOfRuleBody.add(new CMAGNonTerminalSymbol(ar.getObject(), listOfDuplicateAttributes, ar.getId()));
                 }
-            }
-
-            for(AttributeRule ar : listOfAttributeRules){
-                ar.applyRule();
             }
 
 
