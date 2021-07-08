@@ -1,6 +1,7 @@
 package ConstraintMultisetAttributeGrammar;
 
 import ContextFreeGrammar.CFGTerminalSymbol;
+import GeneralComponents.AbstractSymbol;
 
 import java.util.List;
 import java.util.UUID;
@@ -19,4 +20,8 @@ public class CMAGTerminalSymbol extends CMAGSymbol {
         super(object, attribute);
     }
 
+    @Override
+    public CMAGTerminalSymbol clone() {
+        return new CMAGTerminalSymbol(this.getObject(), this.getAttributes(), this.getId());
+    }
 }

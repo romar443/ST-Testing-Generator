@@ -16,4 +16,9 @@ public class CFGTerminalSymbol extends CFGSymbol {
         super(object, id);
     }
 
+    @Override
+    public CFGTerminalSymbol clone() {
+        return new CFGTerminalSymbol(this.getObject(), this.getId());
+    }
+
 }

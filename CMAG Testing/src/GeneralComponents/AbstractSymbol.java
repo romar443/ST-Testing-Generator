@@ -1,8 +1,5 @@
 package GeneralComponents;
 
-import ContextFreeGrammar.StartSymbol;
-
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -51,6 +48,7 @@ public abstract class AbstractSymbol<T> {
         return this.id;
     }
 
+    public abstract AbstractSymbol clone();
 
 
 }

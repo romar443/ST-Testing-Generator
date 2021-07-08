@@ -8,6 +8,11 @@ import java.util.UUID;
  * Abstract CFG symbol
  */
 public abstract class CFGSymbol extends AbstractSymbol {
+
+    /**
+     * The default constructor
+     * @param object The object held within the symbol
+     */
     public CFGSymbol(Object object) {
         super(object);
     }

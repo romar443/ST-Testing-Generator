@@ -15,5 +15,10 @@ public class CFGNonTerminalSymbol extends CFGSymbol {
     public CFGNonTerminalSymbol(Object object, UUID id) {
         super(object, id);
     }
+
+    @Override
+    public CFGTerminalSymbol clone() {
+        return new CFGTerminalSymbol(this.getObject(), this.getId());
+    }
 }
 

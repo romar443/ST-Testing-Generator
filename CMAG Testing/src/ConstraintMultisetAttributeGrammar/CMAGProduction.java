@@ -64,7 +64,7 @@ public class CMAGProduction extends CFGProduction {
     }
 
     /**
-     * Constructor with single constraint
+     * Constructor with single constraint and single attribute rule
      * @param ruleHead A {@linkplain CMAGNonTerminalSymbol} as defined for CMAG's
      * @param ruleBody A list of {@linkplain CMAGNonTerminalSymbol}s and {@linkplain CMAGTerminalSymbol}s, returned when the production is applied
      * @param constraint A single constraint which must be fulfilled in order to apply the production
@@ -135,15 +135,15 @@ public class CMAGProduction extends CFGProduction {
 
                 if (ar instanceof CMAGTerminalSymbol){
                     for (Attribute oldAttribute : ((CMAGTerminalSymbol) ar).getAttributes()){
-                        listOfDuplicateAttributes.add(new Attribute(oldAttribute.getValue(), oldAttribute.getName()));
+                        listOfDuplicateAttributes.add(oldAttribute.clone());
                     }
-                    copyOfRuleBody.add( new CMAGTerminalSymbol ( ar.getObject(), listOfDuplicateAttributes, ar.getId()));
+                    copyOfRuleBody.add(ar.clone());
                 }
                 else {
                     for (Attribute oldAttribute : ((CMAGNonTerminalSymbol) ar).getAttributes()){
-                        listOfDuplicateAttributes.add(new Attribute(oldAttribute.getValue(), oldAttribute.getName()));
+                        listOfDuplicateAttributes.add(oldAttribute.clone());
                     }
-                    copyOfRuleBody.add(new CMAGNonTerminalSymbol(ar.getObject(), listOfDuplicateAttributes, ar.getId()));
+                    copyOfRuleBody.add(ar.clone());
                 }
             }
 
@@ -159,5 +159,4 @@ public class CMAGProduction extends CFGProduction {
     public List<Constraint> getConstraints() {
         return listOfConstraints;
     }
-
 }

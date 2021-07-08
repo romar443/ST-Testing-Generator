@@ -18,4 +18,9 @@ public class CMAGNonTerminalSymbol extends CMAGSymbol {
     public CMAGNonTerminalSymbol(Object object, Attribute attribute) {
         super(object, attribute);
     }
+
+    @Override
+    public CMAGNonTerminalSymbol clone() {
+        return new CMAGNonTerminalSymbol(this.getObject(), this.getAttributes(), this.getId());
+    }
 }

@@ -63,8 +63,6 @@ public class CarExample {
         //Terminal Symbol
         CMAGTerminalSymbol FinishedCar = new CMAGTerminalSymbol("FinishedCar", carAttributes);
 
-        //start
-        CMAGStartSymbol start = new CMAGStartSymbol(UnfinishedCar);
 
         //constraints
         //The constraint is fulfilled if the value IS NOT equal to the starting value
@@ -120,7 +118,7 @@ public class CarExample {
 
 
 
-        //User productions:
+        //Use productions:
         List<AbstractSymbol> result1 = assignColour.applyProduction(UnfinishedCar);
         CMAGNonTerminalSymbol colouredCar = (CMAGNonTerminalSymbol) result1.get(0);
 

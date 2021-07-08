@@ -2,6 +2,7 @@ package ConstraintMultisetAttributeGrammar;
 
 import ContextFreeGrammar.*;
 import GeneralComponents.AbstractProduction;
+import GeneralComponents.AbstractSymbol;
 
 import java.util.List;
 
@@ -16,10 +17,13 @@ public class CMAG extends CFG {
     private List<Constraint> constraints;
 
 
-    public CMAG(List<CFGTerminalSymbol> terminalSymbols, List<CFGNonTerminalSymbol> nonTerminalSymbols, StartSymbol startSymbol, List<AbstractProduction> productions,
+    public CMAG(List<CFGTerminalSymbol> terminalSymbols, List<CFGNonTerminalSymbol> nonTerminalSymbols, AbstractSymbol startSymbol, List<AbstractProduction> productions,
                 List<Attribute> attributes, List<AttributeRule> attributeRules, List<Constraint> constraints) {
-
         super(terminalSymbols, nonTerminalSymbols, startSymbol, productions);
+
+        if(!(startSymbol instanceof CMAGNonTerminalSymbol)){
+            throw new IllegalArgumentException("Start Symbol is not CMAGNonTerminalSymbol");
+        }
         this.attributes = attributes;
         this.attributeRules = attributeRules;
         this.constraints = constraints;

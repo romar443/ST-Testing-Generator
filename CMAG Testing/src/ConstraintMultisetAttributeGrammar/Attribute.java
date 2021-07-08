@@ -32,4 +32,8 @@ public class Attribute<T> {
     public void setName(String name){
         this.name = name;
     }
+
+    public Attribute clone(){
+        return new Attribute(this.value, this.name);
+    }
 }
