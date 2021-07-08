@@ -35,7 +35,7 @@ public class ExampleCMAG {
 
 
         //Step 4: Define an Attribute Rule
-        AttributeRule x_times_2 = new AttributeRule(2, new Multiplication(), "x", nonTerminalSymbol_A);
+        AttributeRule x_times_2 = new AttributeRule(2, new Multiplication(), "x", nonTerminalSymbol_A.getId());
 
 
         //Step 5: Define a Production

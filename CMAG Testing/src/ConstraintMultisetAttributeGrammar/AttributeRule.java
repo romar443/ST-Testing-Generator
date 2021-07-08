@@ -5,11 +5,15 @@ import GeneralComponents.AbstractSymbol;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
- * An {@linkplain AttributeRule} represents the operation that will occur on a specified attribute, when a production is applied. These operations allow attributes
+ * <p>An {@linkplain AttributeRule} represents the operation that will occur on a specified attribute, when a production is applied. These operations allow attributes
  * to be Inherited, a key concept of CMAG's. As currently modelled, an {@linkplain AttributeRule} allows either the assigning of an attribute, or an operation to be
- * executed upon an attribute with some constant. By chaining the rules, one can execute any type of function.
+ * executed upon an attribute with some constant. By chaining the rules, one can execute any type of function.</p>
+ *
+ * <p>Key to this is that the rule is constructed such that an id is passed in the constructor. The id tells the rule which symbol
+ * from the body of the production rule to be applied to.</p>
  */
 public class AttributeRule {
 
@@ -28,15 +32,15 @@ public class AttributeRule {
     /**
      * The {@linkplain Attribute} which will be used to assign FROM
      */
-    private CMAGSymbol assignFrom;
+    private UUID assignFromId;
     /**
      * The {@linkplain Attribute} to which a value will be ASSIGNED
      */
-    private CMAGSymbol assignee;
+    private UUID assigneeId;
     /**
      * Some {@linkplain Attribute}, which has some constant stored at its {@linkplain Attribute#getValue()}
      */
-    private Object constant;
+    private Object constantValue;
     /**
      * Flag used to indicate whether an assignment or operation is to take place.
      */
@@ -52,12 +56,12 @@ public class AttributeRule {
      * @param assigneeAttributeName The {@linkplain CMAGSymbol} to which the {@linkplain Attribute} and its corresponding value is assigned to
      * @param assignee The name of the {@linkplain Attribute} TO which the value is assigned
      */
-    public AttributeRule (CMAGSymbol assignFrom, String assignFromAttributeName, String assigneeAttributeName, CMAGSymbol assignee){
+    public AttributeRule (UUID assignFrom, String assignFromAttributeName, String assigneeAttributeName, UUID assignee){
         this.assignmentFlag = true;
-        this.assignFrom = assignFrom;
+        this.assignFromId = assignFrom;
         this.assignFromAttributeName = assignFromAttributeName;
         this.assigneeAttributeName = assigneeAttributeName;
-        this.assignee = assignee;
+        this.assigneeId = assignee;
     }
 
 
@@ -70,13 +74,12 @@ public class AttributeRule {
      * @param assigneeAttributeName The {@linkplain CMAGSymbol} to which the {@linkplain Attribute} and its corresponding value is assigned to
      * @param assignee The name of the {@linkplain Attribute} TO which the value is assigned
      */
-    public AttributeRule (Object constant, AbstractOperator operation, String assigneeAttributeName, CMAGSymbol assignee){
+    public AttributeRule (Object constant, AbstractOperator operation, String assigneeAttributeName, UUID assignee){
         this.operation = operation;
-        this.constant = constant;
-        this.assignee = assignee;
+        this.constantValue = constant;
+        this.assigneeId = assignee;
         this.assigneeAttributeName = assigneeAttributeName;
     }
-
 
 
 
@@ -84,9 +87,9 @@ public class AttributeRule {
      * Either assigns the value from some {@linkplain CMAGSymbol}s {@linkplain Attribute} to another {@linkplain CMAGSymbol}s {@linkplain Attribute}, or performs
      * an {@linkplain #operation} upon some {@linkplain CMAGSymbol}s {@linkplain Attribute}s value. The functionality is based upon the constructor used, which sets
      * the assignment flag
-     * @return
+     * @return The AbstractSymbol
      */
-    public AbstractSymbol applyRule(){
+    public AbstractSymbol applyRule(CMAGSymbol assignee, CMAGSymbol assignFrom){
 
         //If assignmentFlag is true, then the rule is an assignment. The assignee's attribute is set with the value of the assignFrom attribute
         if (Objects.equals(this.assignmentFlag, true)){
@@ -95,9 +98,20 @@ public class AttributeRule {
         }
 
         //In the case that an operation is set, return the assignee symbol, with a new value in the given attribute
-        Attribute attributePlaceholder = new Attribute(constant, "constant");
+        Attribute attributePlaceholder = new Attribute(constantValue, "constant");
         assignee.getAttributeWithName(assigneeAttributeName).setValue(operation.getResult(attributePlaceholder, assignee.getAttributeWithName(assigneeAttributeName)));
         return assignee;
     }
 
+    public Boolean assignmentRule(){
+        return this.assignmentFlag;
+    }
+
+    public UUID getAssigneeId() {
+        return assigneeId;
+    }
+
+    public UUID getAssignFromId() {
+        return assignFromId;
+    }
 }

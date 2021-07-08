@@ -8,6 +8,7 @@ import GeneralComponents.AbstractSymbol;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Implementation of a grammar production for CMAG's. The ruleHead must be a non-terminal symbol, as defined by CMAG's. Replaces the ruleHead with the ruleBody
@@ -106,7 +107,16 @@ public class CMAGProduction extends CFGProduction {
     }
 
     /**
-     * Applies the production to the supplied {@linkplain CFGNonTerminalSymbol}, executing all {@linkplain AttributeRule}s and checking all {@linkplain Constraint}s
+     * <p>Applies the production to the supplied {@linkplain CFGNonTerminalSymbol}, executing all
+     * {@linkplain AttributeRule}s and checking all {@linkplain Constraint}s</p>
+     *
+     * <p><h3>Important to note:</h3>
+     * All symbols in the rule body and their corresponding attributes are cloned, after all attribute rules have been applied.
+     * The id of the symbol is used to track that it is still the correct symbol, but it must be a new object such that
+     * the values of attributes in symbols are able to be changed later without changing the values of attributes in the
+     * instance used in the current rule. This allows a generator to be able to print a tree with all attribute values at
+     * a given point in the tree.</p>
+     *
      * @param nonTerminal The {@linkplain CFGNonTerminalSymbol} passed as the ruleHead argument
      * @return The {@linkplain #getRuleBody()}
      * @throws Exception Thrown when not all constraints are fulfilled, meaning the production is not applicable
@@ -119,9 +129,23 @@ public class CMAGProduction extends CFGProduction {
 
             //Apply AttributeRules
             for(AttributeRule ar : listOfAttributeRules){
-                ar.applyRule();
-            }
 
+                //Retrieve the CMAGSymbol from the ruleBody for which the attribute rule will be evaluated
+                CMAGSymbol assignee = getSymbolWithId(ar.getAssigneeId());
+
+                //If the AttributeRule is an assignment, then a Symbol from which the value of some Attribute will be assigned
+                //is also needed
+                if (ar.assignmentRule()){
+                    CMAGSymbol assignFrom = getSymbolWithId(ar.getAssignFromId());
+                    ar.applyRule(assignee, assignFrom);
+                }
+
+                //Otherwise the rule is some operation with a constant, an no Symbol is needed from which an attribute must
+                //be taken
+                else{
+                    ar.applyRule(assignee, null);
+                }
+            }
 
             //Introduce a copy of the objects in the rule body, so new attributes may be assigned without altering the attributes from symbols in previous productions
             List<AbstractSymbol> copyOfRuleBody = new ArrayList<>();
@@ -156,7 +180,25 @@ public class CMAGProduction extends CFGProduction {
         }
     }
 
+    /**
+     * @return A List of all {@linkplain Constraint}s of the {@linkplain CMAGProduction}
+     */
     public List<Constraint> getConstraints() {
         return listOfConstraints;
+    }
+
+    /** Used to find the correct instance of a {@linkplain CMAGSymbol} so that an {@linkplain AttributeRule} can
+     * be applied.
+     *
+     * @param id {@linkplain UUID}
+     * @return {@linkplain CMAGSymbol}
+     */
+    public CMAGSymbol getSymbolWithId(UUID id) throws ClassNotFoundException {
+        for (AbstractSymbol symbol : getRuleBody()){
+            if (symbol.getId() == id){
+                return (CMAGSymbol) symbol;
+            }
+        }
+        throw new ClassNotFoundException("The symbol with id: " + id + "\n was not found!");
     }
 }

@@ -79,24 +79,24 @@ public class CarExample {
 
         //Attribute Rules
         //colour
-        AttributeRule assignBlue = new AttributeRule(blue, new AssignString(), "colour", UnfinishedCar);
-        AttributeRule assignRed = new AttributeRule(red, new AssignString(), "colour", UnfinishedCar);
-        AttributeRule assignWhite = new AttributeRule(white, new AssignString(), "colour", UnfinishedCar);
+        AttributeRule assignBlue = new AttributeRule(blue, new AssignString(), "colour", UnfinishedCar.getId());
+        AttributeRule assignRed = new AttributeRule(red, new AssignString(), "colour", UnfinishedCar.getId());
+        AttributeRule assignWhite = new AttributeRule(white, new AssignString(), "colour", UnfinishedCar.getId());
 
         //brand
-        AttributeRule assignBMW = new AttributeRule(bmw, new AssignString(), "brand", UnfinishedCar);
-        AttributeRule assignAudi = new AttributeRule(audi, new AssignString(), "brand", UnfinishedCar);
-        AttributeRule assignMercedes = new AttributeRule(mercedes, new AssignString(), "brand", UnfinishedCar);
+        AttributeRule assignBMW = new AttributeRule(bmw, new AssignString(), "brand", UnfinishedCar.getId());
+        AttributeRule assignAudi = new AttributeRule(audi, new AssignString(), "brand", UnfinishedCar.getId());
+        AttributeRule assignMercedes = new AttributeRule(mercedes, new AssignString(), "brand", UnfinishedCar.getId());
 
         //wheel size
-        AttributeRule assign30WheelSize = new AttributeRule(wheel30, new Addition(), "wheelsize", UnfinishedCar);
-        AttributeRule assign50WheelSize = new AttributeRule(wheel50, new Addition(), "wheelsize", UnfinishedCar);
-        AttributeRule assign70WheelSize = new AttributeRule(wheel70, new Addition(), "wheelsize", UnfinishedCar);
+        AttributeRule assign30WheelSize = new AttributeRule(wheel30, new Addition(), "wheelsize", UnfinishedCar.getId());
+        AttributeRule assign50WheelSize = new AttributeRule(wheel50, new Addition(), "wheelsize", UnfinishedCar.getId());
+        AttributeRule assign70WheelSize = new AttributeRule(wheel70, new Addition(), "wheelsize", UnfinishedCar.getId());
 
         //seat number
-        AttributeRule assign2Seats = new AttributeRule(seats2, new Addition(), "seats", UnfinishedCar);
-        AttributeRule assign4Seats = new AttributeRule(seats4, new Addition(), "seats", UnfinishedCar);
-        AttributeRule assign5Seats = new AttributeRule(seats5, new Addition(), "seats", UnfinishedCar);
+        AttributeRule assign2Seats = new AttributeRule(seats2, new Addition(), "seats", UnfinishedCar.getId());
+        AttributeRule assign4Seats = new AttributeRule(seats4, new Addition(), "seats", UnfinishedCar.getId());
+        AttributeRule assign5Seats = new AttributeRule(seats5, new Addition(), "seats", UnfinishedCar.getId());
 
 
         //Produtions
