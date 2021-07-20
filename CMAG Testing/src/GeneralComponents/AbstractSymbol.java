@@ -25,6 +25,7 @@ public abstract class AbstractSymbol<T> {
     public AbstractSymbol(T object){
         this.object = object;
         this.id = UUID.randomUUID();
+        System.out.println("New symbol defined with name: " + this.getClass().getName() + " and id: " + this.id);
     }
 
     public AbstractSymbol(T object, UUID id){
