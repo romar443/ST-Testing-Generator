@@ -15,8 +15,8 @@ public class AssignString extends AbstractStringOperator {
     public String getResult(Attribute a1, Attribute a2) {
 
         try {
-            var i1 = (String) a1.getValue();
-            return i1;
+            var s1 = (String) a1.getValue();
+            return s1;
         } catch (Exception e) {
             throw new ClassCastException("\n Attribute Values weren't of type String \n");
         }
