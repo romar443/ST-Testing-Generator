@@ -18,9 +18,7 @@ public class AssignString extends AbstractStringOperator {
             var i1 = (String) a1.getValue();
             return i1;
         } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("\n Attribute Values weren't of type Integer \n");
-            return null;
+            throw new ClassCastException("\n Attribute Values weren't of type String \n");
         }
     }
 }

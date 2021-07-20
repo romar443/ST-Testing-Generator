@@ -1,3 +1,5 @@
+package Implementations;
+
 import ConstraintMultisetAttributeGrammar.Attribute;
 import ConstraintMultisetAttributeGrammar.CMAGNonTerminalSymbol;
 import ConstraintMultisetAttributeGrammar.CMAGProduction;
@@ -43,6 +45,8 @@ public class JsonExample {
         CMAGTerminalSymbol methodNameGetType = new CMAGTerminalSymbol("getType", new ArrayList<>());
         CMAGTerminalSymbol methodNameSetFile = new CMAGTerminalSymbol("setFile", new ArrayList<>());
     }
+
+
 
 
 

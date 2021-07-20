@@ -12,8 +12,7 @@ public class NotEqualTo extends AbstractBooleanOperator {
             var i2 =  a2.getValue();
             return !(i1.equals(i2));
         } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+            throw new ClassCastException("\n Attribute Values weren't of type Boolean \n");
         }
     }
 

@@ -13,9 +13,7 @@ public class Multiplication extends AbstractArithmeticOperator {
             var i2 = (Integer) a2.getValue();
             return (i1 * i2);
         } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("\n Attribute Values weren't of type Integer \n");
-            return null;
+            throw new ClassCastException("\n Attribute Values weren't of type Integer \n");
         }
     }
 }

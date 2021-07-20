@@ -17,8 +17,7 @@ public class GreaterThan extends AbstractBooleanOperator {
             var i2 = (Integer) a2.getValue();
             return (i1 > i2);
         } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+            throw new ClassCastException("\n Attribute Values weren't of type Boolean \n");
         }
     }
 
