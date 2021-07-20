@@ -1,3 +1,5 @@
+package Implementations;
+
 import ConstraintMultisetAttributeGrammar.*;
 import GeneralComponents.AbstractSymbol;
 import GeneralComponents.Operators.ArithmeticOperators.Multiplication;
@@ -31,26 +33,15 @@ public class ExampleCMAG {
 
 
         //Step 3: Define a Constraint
-        Constraint c1 = new Constraint(nonTerminalSymbol_A, "x", new EqualTo(), nonTerminalSymbol_S, "x");
+        Constraint c1 = new Constraint(nonTerminalSymbol_A, "x", new GreaterThan(), 0);
 
 
         //Step 4: Define an Attribute Rule
-        AttributeRule x_times_2 = new AttributeRule(2, new Multiplication(), "x", nonTerminalSymbol_A.getId());
+        AttributeRule x_times_2 = new AttributeRule(2, new Multiplication(), "x", nonTerminalSymbol_A);
 
 
         //Step 5: Define a Production
         CMAGProduction p1 = new CMAGProduction(nonTerminalSymbol_S, Collections.singletonList(nonTerminalSymbol_A), c1, x_times_2);
-
-//        //Arrays
-//        List<CMAGTerminalSymbol> terminalSymbols = Arrays.asList(terminalSymbol_a, terminalSymbol_b);
-//        List<CMAGNonTerminalSymbol> nonTerminalSymbols = Arrays.asList(nonTerminalSymbol_S, nonTerminalSymbol_A);
-//        List<CMAGProduction> productions = Collections.singletonList(p1);
-//        List
-//
-//
-//        //Step 6: Instantiate Grammar
-//        CMAG cmag = new CMAG()
-
 
 
 
@@ -60,6 +51,11 @@ public class ExampleCMAG {
 
         CMAGNonTerminalSymbol A = (CMAGNonTerminalSymbol) r1.get(0);
         A.getAttributes().forEach(attribute -> System.out.println(attribute.getValue()));
+
+
+
+
     }
+
 
 }

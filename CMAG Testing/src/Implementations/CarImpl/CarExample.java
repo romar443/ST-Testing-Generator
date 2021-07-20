@@ -1,9 +1,14 @@
+package Implementations.CarImpl;
+
 import ConstraintMultisetAttributeGrammar.*;
 import GeneralComponents.AbstractSymbol;
 import GeneralComponents.Operators.ArithmeticOperators.Addition;
 import GeneralComponents.Operators.BooleanOperators.EqualTo;
 import GeneralComponents.Operators.BooleanOperators.NotEqualTo;
 import GeneralComponents.Operators.StringOperators.AssignString;
+import Implementations.CarImpl.Components.Brand;
+import Implementations.CarImpl.Components.Car;
+import Implementations.CarImpl.Components.Colour;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,14 +16,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class CarExample {
-
-    public enum Brand {
-        BMW, AUDI, MERCEDES;
-    }
-
-    public enum Colour {
-        BLUE, RED, WHITE;
-    }
 
     public static void main(String[] args) throws Exception {
 
@@ -79,24 +76,24 @@ public class CarExample {
 
         //Attribute Rules
         //colour
-        AttributeRule assignBlue = new AttributeRule(blue, new AssignString(), "colour", UnfinishedCar.getId());
-        AttributeRule assignRed = new AttributeRule(red, new AssignString(), "colour", UnfinishedCar.getId());
-        AttributeRule assignWhite = new AttributeRule(white, new AssignString(), "colour", UnfinishedCar.getId());
+        AttributeRule assignBlue = new AttributeRule(blue, new AssignString(), "colour", UnfinishedCar);
+        AttributeRule assignRed = new AttributeRule(red, new AssignString(), "colour", UnfinishedCar);
+        AttributeRule assignWhite = new AttributeRule(white, new AssignString(), "colour", UnfinishedCar);
 
         //brand
-        AttributeRule assignBMW = new AttributeRule(bmw, new AssignString(), "brand", UnfinishedCar.getId());
-        AttributeRule assignAudi = new AttributeRule(audi, new AssignString(), "brand", UnfinishedCar.getId());
-        AttributeRule assignMercedes = new AttributeRule(mercedes, new AssignString(), "brand", UnfinishedCar.getId());
+        AttributeRule assignBMW = new AttributeRule(bmw, new AssignString(), "brand", UnfinishedCar);
+        AttributeRule assignAudi = new AttributeRule(audi, new AssignString(), "brand", UnfinishedCar);
+        AttributeRule assignMercedes = new AttributeRule(mercedes, new AssignString(), "brand", UnfinishedCar);
 
         //wheel size
-        AttributeRule assign30WheelSize = new AttributeRule(wheel30, new Addition(), "wheelsize", UnfinishedCar.getId());
-        AttributeRule assign50WheelSize = new AttributeRule(wheel50, new Addition(), "wheelsize", UnfinishedCar.getId());
-        AttributeRule assign70WheelSize = new AttributeRule(wheel70, new Addition(), "wheelsize", UnfinishedCar.getId());
+        AttributeRule assign30WheelSize = new AttributeRule(wheel30, new Addition(), "wheelsize", UnfinishedCar);
+        AttributeRule assign50WheelSize = new AttributeRule(wheel50, new Addition(), "wheelsize", UnfinishedCar);
+        AttributeRule assign70WheelSize = new AttributeRule(wheel70, new Addition(), "wheelsize", UnfinishedCar);
 
         //seat number
-        AttributeRule assign2Seats = new AttributeRule(seats2, new Addition(), "seats", UnfinishedCar.getId());
-        AttributeRule assign4Seats = new AttributeRule(seats4, new Addition(), "seats", UnfinishedCar.getId());
-        AttributeRule assign5Seats = new AttributeRule(seats5, new Addition(), "seats", UnfinishedCar.getId());
+        AttributeRule assign2Seats = new AttributeRule(seats2, new Addition(), "seats", UnfinishedCar);
+        AttributeRule assign4Seats = new AttributeRule(seats4, new Addition(), "seats", UnfinishedCar);
+        AttributeRule assign5Seats = new AttributeRule(seats5, new Addition(), "seats", UnfinishedCar);
 
 
         //Produtions
@@ -148,7 +145,15 @@ public class CarExample {
         List<AbstractSymbol> result5 = assembleCar.applyProduction(seatedCar);
         CMAGTerminalSymbol finalCar = (CMAGTerminalSymbol) result5.get(0);
 
-        finalCar.getAttributes().forEach(attribute -> System.out.println(attribute.getValue()));
+
+
+        Colour colour = Colour.valueOf((String) finalCar.getAttributeWithName("colour").getValue());
+        Brand brand = Brand.valueOf((String)finalCar.getAttributeWithName("brand").getValue());
+        Integer wheelsize = (Integer) finalCar.getAttributeWithName("wheelsize").getValue();
+        Integer seats = (Integer) finalCar.getAttributeWithName("seats").getValue();
+
+        Car car = new Car(colour, brand, wheelsize, seats);
+        System.out.println(car.toString());
     }
 
 }
