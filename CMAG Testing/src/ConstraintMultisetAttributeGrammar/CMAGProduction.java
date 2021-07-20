@@ -80,6 +80,18 @@ public class CMAGProduction extends CFGProduction {
     }
 
     /**
+     * Constructor with no constraints and attribute rules
+     * @param ruleHead A {@linkplain CMAGNonTerminalSymbol} as defined for CMAG's
+     * @param ruleBody A list of {@linkplain CMAGNonTerminalSymbol}s and {@linkplain CMAGTerminalSymbol}s, returned when the production is applied
+     */
+    public CMAGProduction(AbstractSymbol ruleHead, List<AbstractSymbol> ruleBody) {
+
+        super(ruleHead, ruleBody);
+        this.listOfConstraints = new ArrayList<>();
+        this.listOfAttributeRules = new ArrayList<>();
+    }
+
+    /**
      * The core of the class. Returns whether the production is applicable. I.e. are all {@linkplain Constraint}'s fulfilled
      * @param nonTerminal The {@linkplain CMAGNonTerminalSymbol} symbol to be replaced by the production
      * @return Boolean, can the {@linkplain CMAGProduction} be applied
