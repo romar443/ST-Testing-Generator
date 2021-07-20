@@ -1,4 +1,4 @@
-package Implementations;
+package Implementations.Basics;
 
 import ConstraintMultisetAttributeGrammar.*;
 import GeneralComponents.AbstractSymbol;
