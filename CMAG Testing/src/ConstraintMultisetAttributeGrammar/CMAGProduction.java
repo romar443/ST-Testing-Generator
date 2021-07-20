@@ -85,7 +85,7 @@ public class CMAGProduction extends CFGProduction {
      * @return Boolean, can the {@linkplain CMAGProduction} be applied
      */
     @Override
-    public Boolean applicable (AbstractSymbol nonTerminal){
+    public Boolean applicable (AbstractSymbol nonTerminal) throws ClassNotFoundException {
 
         //Rulehead must be a Non terminal symbol as defined for all CFG Grammars and their derivations
         if(!(getRuleHead() instanceof CMAGNonTerminalSymbol)){
@@ -95,16 +95,43 @@ public class CMAGProduction extends CFGProduction {
         //Checks the id of the symbols to see if they have the same 'signature'. Symbols are duplicated in the production, so the id is used to identify symbols
         //that are "the same"
         if (!(getRuleHead().getId() == nonTerminal.getId())) {
+
+            //If the rulehead is not a nonterminal symbol, the rule is not applicable and false is returned
             return false;
+
         } else {
+
+            //Iterate through all constraints, if any are not fulfilled, then the rule is not applicable and false is return
             for(Constraint c : listOfConstraints){
-                if (c.getSatisfied().equals(Boolean.FALSE)){
-                    return false;
+
+                //Get the leftSymbol from the ruleBody
+                CMAGSymbol leftSymbol = getSymbolWithId(c.getLeftSymbolId());
+
+                //Flag is true when operating with a constant, no rightside attribute is needed.
+                if (Boolean.TRUE.equals(c.getConstantFlag())){
+
+                    //Check if the constraint is satisfied, otherwise return false
+                    if (c.getSatisfied(leftSymbol, null).equals(Boolean.FALSE)){
+                        return false;
+                    }
+                }
+                else{
+
+                    //Get the rightSymbol from the ruleBody
+                    CMAGSymbol rightSymbol = getSymbolWithId(c.getRightSymbolId());
+
+                    //Check if the constraint is satisfied, otherwise return false
+                    if (c.getSatisfied(leftSymbol, rightSymbol).equals(Boolean.FALSE)){
+                        return false;
+                    }
                 }
             }
+
+            //All constraints are fulfilled, return true
             return true;
         }
     }
+
 
     /**
      * <p>Applies the production to the supplied {@linkplain CFGNonTerminalSymbol}, executing all
@@ -158,14 +185,20 @@ public class CMAGProduction extends CFGProduction {
                 List listOfDuplicateAttributes = new ArrayList();
 
                 if (ar instanceof CMAGTerminalSymbol){
-                    for (Attribute oldAttribute : ((CMAGTerminalSymbol) ar).getAttributes()){
+                    CMAGTerminalSymbol terminalSymbol = (CMAGTerminalSymbol) ar;
+                    for (Attribute oldAttribute : (terminalSymbol.getAttributes())){
                         listOfDuplicateAttributes.add(oldAttribute.clone());
+
+                        //print the nonterminal
+                        System.out.println(terminalSymbol.toString());
+
                     }
                     copyOfRuleBody.add(ar.clone());
                 }
                 else {
                     for (Attribute oldAttribute : ((CMAGNonTerminalSymbol) ar).getAttributes()){
                         listOfDuplicateAttributes.add(oldAttribute.clone());
+
                     }
                     copyOfRuleBody.add(ar.clone());
                 }
@@ -194,10 +227,13 @@ public class CMAGProduction extends CFGProduction {
      * @return {@linkplain CMAGSymbol}
      */
     public CMAGSymbol getSymbolWithId(UUID id) throws ClassNotFoundException {
-        for (AbstractSymbol symbol : getRuleBody()){
+        for (AbstractSymbol symbol : this.getRuleBody()){
             if (symbol.getId() == id){
                 return (CMAGSymbol) symbol;
             }
+        }
+        if(this.getRuleHead().getId() == id){
+            return (CMAGSymbol) this.getRuleHead();
         }
         throw new ClassNotFoundException("The symbol with id: " + id + "\n was not found!");
     }

@@ -56,12 +56,12 @@ public class AttributeRule {
      * @param assigneeAttributeName The {@linkplain CMAGSymbol} to which the {@linkplain Attribute} and its corresponding value is assigned to
      * @param assignee The name of the {@linkplain Attribute} TO which the value is assigned
      */
-    public AttributeRule (UUID assignFrom, String assignFromAttributeName, String assigneeAttributeName, UUID assignee){
+    public AttributeRule (AbstractSymbol assignFrom, String assignFromAttributeName, String assigneeAttributeName, AbstractSymbol assignee){
         this.assignmentFlag = true;
-        this.assignFromId = assignFrom;
+        this.assignFromId = assignFrom.getId();
         this.assignFromAttributeName = assignFromAttributeName;
         this.assigneeAttributeName = assigneeAttributeName;
-        this.assigneeId = assignee;
+        this.assigneeId = assignee.getId();
     }
 
 
@@ -74,10 +74,10 @@ public class AttributeRule {
      * @param assigneeAttributeName The {@linkplain CMAGSymbol} to which the {@linkplain Attribute} and its corresponding value is assigned to
      * @param assignee The name of the {@linkplain Attribute} TO which the value is assigned
      */
-    public AttributeRule (Object constant, AbstractOperator operation, String assigneeAttributeName, UUID assignee){
+    public AttributeRule (Object constant, AbstractOperator operation, String assigneeAttributeName, AbstractSymbol assignee){
         this.operation = operation;
         this.constantValue = constant;
-        this.assigneeId = assignee;
+        this.assigneeId = assignee.getId();
         this.assigneeAttributeName = assigneeAttributeName;
     }
 
