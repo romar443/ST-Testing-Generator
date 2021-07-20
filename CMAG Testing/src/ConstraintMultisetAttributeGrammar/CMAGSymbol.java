@@ -65,6 +65,16 @@ public abstract class CMAGSymbol extends CFGSymbol {
         return null;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder attributeListString = new StringBuilder();
+        for (Attribute a : attributes){
+            attributeListString.append(a.getName()).append(" : ").append(a.getValue().toString()).append("; ");
+        }
+        return "CMAGSymbol{" +
+                "attributes=" + attributeListString +
+                '}';
+    }
 }
 
 

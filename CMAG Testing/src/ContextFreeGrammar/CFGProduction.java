@@ -54,7 +54,7 @@ public class CFGProduction extends AbstractProduction {
      * @return Boolean, declaring whether the {@linkplain CMAGProduction} can be applied
      */
     @Override
-    public Boolean applicable(AbstractSymbol nonTerminal) {
+    public Boolean applicable(AbstractSymbol nonTerminal) throws ClassNotFoundException {
 
         //Rule head must be a NonTerminalSymbol in context-free grammars
         if(!(getRuleHead() instanceof CFGNonTerminalSymbol)){
