@@ -22,17 +22,17 @@ import java.util.List;
  *<br><br>
  *  4. jsonObject   ->
  *        openJsonObject <br>
- *        className, separator, classNameValue, comma <br>
- *        methodName, separator, methodNameValue, comma <br>
- *        inputArgsTypes, separator, openJsonArray, inputArgsTypesArray, closeJsonArray, comma <br>
- *        inputArgs, separator, openJsonArray, inputArgsArray, closeJsonArray, comma <br>
+ *        className,  colon, classNameValue, comma <br>
+ *        methodName,  colon, methodNameValue, comma <br>
+ *        inputArgsTypes,  colon, openJsonArray, inputArgsTypesArray, closeJsonArray, comma <br>
+ *        inputArgs,  colon, openJsonArray, inputArgsArray, closeJsonArray, comma <br>
  *        returnValueBranch, comma <br>
- *        invocationTimeStamp, separator, invocationTimeStampValue, comma <br>
- *        invocationTime, separator, invocationTimeValue, comma <br>
- *        orderId, separator, orderIdValue, comma <br>
- *        threadId, separator, threadIdValue, comma <br>
- *        threadName, separator, threadNameValue, comma <br>
- *        objectHashCode, separator, objectHashCodeValue <br>
+ *        invocationTimeStamp,  colon, invocationTimeStampValue, comma <br>
+ *        invocationTime,  colon, invocationTimeValue, comma <br>
+ *        orderId,  colon, orderIdValue, comma <br>
+ *        threadId,  colon, threadIdValue, comma <br>
+ *        threadName,  colon, threadNameValue, comma <br>
+ *        objectHashCode,  colon, objectHashCodeValue <br>
  *        closeJsonObject
  *<br><br>
  *  5. methodNamePlaceholder -> methodNameValue <br>
@@ -82,15 +82,15 @@ import java.util.List;
  *  21. inputArgsPlaceholder -> inputArgsTypesValue <br>
  *                              AR: inputArgsRule7
  *<br><br>
- *  22. returnValueBranch     -> returnValueType, separator, returnValueType_Value, comma <br>
+ *  22. returnValueBranch     -> returnValueType,  colon, returnValueType_Value, comma <br>
  *                              A.R = returnValueType_Rule
  *<br><br>
- *  23. returnValueBranch   -> returnValueType, separator, returnValueType_Value, comma
- *                             returnValue, separator, returnValue_ValueInt, comma <br>
+ *  23. returnValueBranch   -> returnValueType,  colon, returnValueType_Value, comma
+ *                             returnValue,  colon, returnValue_ValueInt, comma <br>
  *                              A.R = returnValueRule, returnValueType_Rule2
  *<br><br>
- *  24. returnValueBranch    -> returnValueType, separator, returnValueType_Value, comma
- *                             returnValue, separator, openJsonArray, returnValueArray, closeJsonArray, comma <br>
+ *  24. returnValueBranch    -> returnValueType,  colon, returnValueType_Value, comma
+ *                             returnValue,  colon, openJsonArray, returnValueArray, closeJsonArray, comma <br>
  *                              A.R = returnValueType_Rule3
  *<br><br>
  *  25. returnValueArray     -> returnValue_ValueCollection, comma, returnValueArray <br>
@@ -106,7 +106,7 @@ import java.util.List;
 @SuppressWarnings("ALL")
 public class JsonCmag {
 
-    public static CMAG getCMAG(){
+    public static CMAG_Gen getCMAG(){
 
     //Non-terminal Symbols (these have no attributes and are therefore initialised with empty ArrayLists
         CMAGNonTerminalSymbol start = new CMAGNonTerminalSymbol("startSymbol", new ArrayList<>());
@@ -125,8 +125,8 @@ public class JsonCmag {
         Attribute closeJsonObjectAttribute = new Attribute("}", "closeJsonObjectAttribute");
         CMAGTerminalSymbol closeJsonObject = new CMAGTerminalSymbol("}", closeJsonObjectAttribute);
 
-        Attribute separatorAttribute = new Attribute(":", "separatorAttribute");
-        CMAGTerminalSymbol separator = new CMAGTerminalSymbol(":", separatorAttribute);
+        Attribute colonAttribute = new Attribute(":", " colonAttribute");
+        CMAGTerminalSymbol  colon = new CMAGTerminalSymbol(":",  colonAttribute);
 
         Attribute commaAttribute = new Attribute(",", "commaAttribute");
         CMAGTerminalSymbol comma = new CMAGTerminalSymbol(",", commaAttribute);
@@ -297,17 +297,17 @@ public class JsonCmag {
         List<AbstractSymbol> jsonObjectBody= new ArrayList<>();
 
         jsonObjectBody.add(openJsonObject);
-        jsonObjectBody.addAll(Arrays.asList(className, separator, classNameValue, comma));
-        jsonObjectBody.addAll(Arrays.asList(methodName, separator, methodNameValue, comma));
-        jsonObjectBody.addAll(Arrays.asList(inputArgsTypes, separator, openJsonArray, inputArgsTypesArray, closeJsonArray, comma));
-        jsonObjectBody.addAll(Arrays.asList(inputArgs, separator, openJsonArray, inputArgsArray, closeJsonArray, comma));
+        jsonObjectBody.addAll(Arrays.asList(className,  colon, classNameValue, comma));
+        jsonObjectBody.addAll(Arrays.asList(methodName,  colon, methodNameValue, comma));
+        jsonObjectBody.addAll(Arrays.asList(inputArgsTypes,  colon, openJsonArray, inputArgsTypesArray, closeJsonArray, comma));
+        jsonObjectBody.addAll(Arrays.asList(inputArgs,  colon, openJsonArray, inputArgsArray, closeJsonArray, comma));
         jsonObjectBody.addAll(Arrays.asList(returnValueBranch, comma));
-        jsonObjectBody.addAll(Arrays.asList(invocationTimeStamp, separator, invocationTimeStampValue, comma));
-        jsonObjectBody.addAll(Arrays.asList(invocationTime, separator, invocationTimeValue, comma));
-        jsonObjectBody.addAll(Arrays.asList(orderId, separator, orderIdValue, comma));
-        jsonObjectBody.addAll(Arrays.asList(threadId, separator, threadIdValue, comma));
-        jsonObjectBody.addAll(Arrays.asList(threadName, separator, threadNameValue, comma));
-        jsonObjectBody.addAll(Arrays.asList(objectHashCode, separator, objectHashCodeValue));
+        jsonObjectBody.addAll(Arrays.asList(invocationTimeStamp,  colon, invocationTimeStampValue, comma));
+        jsonObjectBody.addAll(Arrays.asList(invocationTime,  colon, invocationTimeValue, comma));
+        jsonObjectBody.addAll(Arrays.asList(orderId,  colon, orderIdValue, comma));
+        jsonObjectBody.addAll(Arrays.asList(threadId,  colon, threadIdValue, comma));
+        jsonObjectBody.addAll(Arrays.asList(threadName,  colon, threadNameValue, comma));
+        jsonObjectBody.addAll(Arrays.asList(objectHashCode,  colon, objectHashCodeValue));
         jsonObjectBody.add(closeJsonObject);
 
         CMAGProduction rule4 = new CMAGProduction(jsonObject, jsonObjectBody);
@@ -364,13 +364,13 @@ public class JsonCmag {
         CMAGProduction rule21 = new CMAGProduction(inputArgsValuePlaceholder, Collections.singletonList(inputArgsValue), new ArrayList<>(), inputArgsRule7);
 
         //Rule 22
-        CMAGProduction rule22 = new CMAGProduction(returnValueBranch, Arrays.asList(returnValueType, separator, returnValueType_Value, comma), new ArrayList<>(), returnValueType_Rule);
+        CMAGProduction rule22 = new CMAGProduction(returnValueBranch, Arrays.asList(returnValueType,  colon, returnValueType_Value, comma), new ArrayList<>(), returnValueType_Rule);
 
         //Rule 23
-        CMAGProduction rule23 = new CMAGProduction(returnValueBranch, Arrays.asList(returnValueType, separator, returnValueType_Value, comma, returnValue, separator, returnValue_ValueInt, comma), new ArrayList<>(), Arrays.asList(returnValueRule, returnValueType_Rule2));
+        CMAGProduction rule23 = new CMAGProduction(returnValueBranch, Arrays.asList(returnValueType,  colon, returnValueType_Value, comma, returnValue,  colon, returnValue_ValueInt, comma), new ArrayList<>(), Arrays.asList(returnValueRule, returnValueType_Rule2));
 
         //Rule 24
-        CMAGProduction rule24 = new CMAGProduction(returnValueBranch, Arrays.asList(returnValueType, separator, returnValueType_Value, comma, returnValue, separator, openJsonArray, returnValueArray, closeJsonArray, comma), new ArrayList<>(), returnValueType_Rule3);
+        CMAGProduction rule24 = new CMAGProduction(returnValueBranch, Arrays.asList(returnValueType,  colon, returnValueType_Value, comma, returnValue,  colon, openJsonArray, returnValueArray, closeJsonArray, comma), new ArrayList<>(), returnValueType_Rule3);
 
         //Rule 25
         CMAGProduction rule25 = new CMAGProduction(returnValueArray, Arrays.asList(returnValue_ValueCollection, comma, returnValueArray), new ArrayList<>(), returnValueRule2);
@@ -380,8 +380,13 @@ public class JsonCmag {
 
 
 
+
         //Define CMAG
-        CMAG jsonCmag = new CMAG();
+        List<CMAGProduction> productions= new ArrayList<>();
+        productions.addAll(Arrays.asList(rule1, rule2, rule3, rule4, rule5, rule6, rule7, rule8, rule9, rule10, rule11, rule12,
+                rule13, rule14, rule15, rule16, rule17, rule18, rule19, rule20, rule21, rule22, rule23, rule24, rule25, rule26));
+
+        CMAG_Gen jsonCmag = new CMAG_Gen(start, productions);
 
         return jsonCmag;
     }
