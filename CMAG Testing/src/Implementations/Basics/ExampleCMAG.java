@@ -48,9 +48,7 @@ public class ExampleCMAG {
 
         //Run the production rule
         List<AbstractSymbol> r1 = p1.applyProduction(nonTerminalSymbol_S);
-
-        CMAGNonTerminalSymbol A = (CMAGNonTerminalSymbol) r1.get(0);
-        A.getAttributes().forEach(attribute -> System.out.println(attribute.getValue()));
+        System.out.println(r1.toString());
 
 
 
