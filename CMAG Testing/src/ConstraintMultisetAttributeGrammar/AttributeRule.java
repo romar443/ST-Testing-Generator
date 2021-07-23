@@ -89,7 +89,7 @@ public class AttributeRule {
      * the assignment flag
      * @return The AbstractSymbol
      */
-    public AbstractSymbol applyRule(CMAGSymbol assignee, CMAGSymbol assignFrom){
+    public AbstractSymbol applyRule(CMAGSymbol assignee, CMAGSymbol assignFrom) throws ClassNotFoundException {
 
         //If assignmentFlag is true, then the rule is an assignment. The assignee's attribute is set with the value of the assignFrom attribute
         if (Objects.equals(this.assignmentFlag, true)){
