@@ -34,6 +34,8 @@ import java.util.List;
  *        threadName,  colon, threadNameValue, comma <br>
  *        objectHashCode,  colon, objectHashCodeValue <br>
  *        closeJsonObject
+ *
+ *                              AR: invocationTimeStampRule, invocationTimeRule, orderIdRule, objectHashCode
  *<br><br>
  *  5. methodNamePlaceholder -> methodNameValue <br>
  *                              AR: methodNameRule
@@ -106,12 +108,14 @@ import java.util.List;
 @SuppressWarnings("ALL")
 public class JsonCmag {
 
-    public static CMAG_Gen getCMAG(){
+    public static CMAG_Gen getCMAG() throws Exception {
 
     //Non-terminal Symbols (these have no attributes and are therefore initialised with empty ArrayLists
         CMAGNonTerminalSymbol start = new CMAGNonTerminalSymbol("startSymbol", new ArrayList<>());
-        CMAGNonTerminalSymbol recursive = new CMAGNonTerminalSymbol("recursive", new ArrayList<>());
-        CMAGNonTerminalSymbol jsonObject = new CMAGNonTerminalSymbol("jsonObject", new ArrayList<>());
+        Attribute recursiveAttribute = new Attribute("r", "recursiveAttribute");
+        CMAGNonTerminalSymbol recursive = new CMAGNonTerminalSymbol("recursive", recursiveAttribute);
+        Attribute jsonObjectAttribute = new Attribute("JO", "jsonObjectAttribute");
+        CMAGNonTerminalSymbol jsonObject = new CMAGNonTerminalSymbol("jsonObject", jsonObjectAttribute);
 
 
     //Terminal symbols for opening and closing arrays and objects as per the json standard
@@ -197,12 +201,12 @@ public class JsonCmag {
         //inputArgsTypesValue
         CMAGNonTerminalSymbol inputArgsTypesValuePlaceholder = new CMAGNonTerminalSymbol("inputArgsTypesValuePlaceholder", new ArrayList<>());
 
-        Attribute inputArgsTypesValueAttribute = new Attribute("", "inputArgsTypesValueValueAttribute");
+        Attribute  inputArgsTypesValueAttribute= new Attribute("", "inputArgsTypesValueAttribute");
         CMAGTerminalSymbol inputArgsTypesValue = new CMAGTerminalSymbol("inputArgsTypesValue", inputArgsTypesValueAttribute);
 
-        AttributeRule inputArgsTypesRule = new AttributeRule("", new AssignString(), "inputArgsTypesValueValueAttribute", inputArgsTypesValue);
-        AttributeRule inputArgsTypesRule2 = new AttributeRule("\"java.lang.String\"", new AssignString(), "inputArgsTypesValueValueAttribute", inputArgsTypesValue);
-        AttributeRule inputArgsTypesRule3 = new AttributeRule("\"java.util.Collection\"", new AssignString(), "inputArgsTypesValueValueAttribute", inputArgsTypesValue);
+        AttributeRule inputArgsTypesRule = new AttributeRule("\"java.lang.Boolean\"", new AssignString(), "inputArgsTypesValueAttribute", inputArgsTypesValue);
+        AttributeRule inputArgsTypesRule2 = new AttributeRule("\"java.lang.String\"", new AssignString(), "inputArgsTypesValueAttribute", inputArgsTypesValue);
+        AttributeRule inputArgsTypesRule3 = new AttributeRule("\"java.util.Collection\"", new AssignString(), "inputArgsTypesValueAttribute", inputArgsTypesValue);
 
 
         //Special case (see rule 6. of the grammar)
@@ -214,13 +218,13 @@ public class JsonCmag {
         Attribute inputArgsValueAttriubte = new Attribute("", "inputArgsValueAttriubte");
         CMAGTerminalSymbol inputArgsValue = new CMAGTerminalSymbol("inputArgsValue", inputArgsValueAttriubte);
 
-        AttributeRule inputArgsRule = new AttributeRule("", new AssignString(), "inputArgsTypesValueValueAttribute", inputArgsValue);
-        AttributeRule inputArgsRule2 = new AttributeRule("\"\"", new AssignString(), "inputArgsTypesValueValueAttribute", inputArgsValue);
-        AttributeRule inputArgsRule3 = new AttributeRule("\"login\"", new AssignString(), "inputArgsTypesValueValueAttribute", inputArgsValue);
-        AttributeRule inputArgsRule4 = new AttributeRule("\"some string\"", new AssignString(), "inputArgsTypesValueValueAttribute", inputArgsValue);
-        AttributeRule inputArgsRule5 = new AttributeRule("false", new AssignString(), "inputArgsTypesValueValueAttribute", inputArgsValue);
-        AttributeRule inputArgsRule6 = new AttributeRule("6697", new AssignString(), "inputArgsTypesValueValueAttribute", inputArgsValue);
-        AttributeRule inputArgsRule7 = new AttributeRule("443", new AssignString(), "inputArgsTypesValueValueAttribute", inputArgsValue);
+        AttributeRule inputArgsRule = new AttributeRule("\"\"", new AssignString(), "inputArgsValueAttriubte", inputArgsValue);
+        AttributeRule inputArgsRule2 = new AttributeRule("\"logout\"", new AssignString(), "inputArgsValueAttriubte", inputArgsValue);
+        AttributeRule inputArgsRule3 = new AttributeRule("\"login\"", new AssignString(), "inputArgsValueAttriubte", inputArgsValue);
+        AttributeRule inputArgsRule4 = new AttributeRule("\"some string\"", new AssignString(), "inputArgsValueAttriubte", inputArgsValue);
+        AttributeRule inputArgsRule5 = new AttributeRule("false", new AssignString(), "inputArgsValueAttriubte", inputArgsValue);
+        AttributeRule inputArgsRule6 = new AttributeRule("6697", new AssignString(), "inputArgsValueAttriubte", inputArgsValue);
+        AttributeRule inputArgsRule7 = new AttributeRule("443", new AssignString(), "inputArgsValueAttriubte", inputArgsValue);
 
 
         //Special case (see rule 7. - 9. of the grammar)
@@ -248,21 +252,21 @@ public class JsonCmag {
 
 
         //invocationTimeStamp
-        Attribute invocationTimeStampValueAttribute = new Attribute(600000000, "invocationTimeStampValueAttribute");
+        Attribute invocationTimeStampValueAttribute = new Attribute(6000000, "invocationTimeStampValueAttribute");
         CMAGTerminalSymbol invocationTimeStampValue = new CMAGTerminalSymbol("invocationTimeStampValue", invocationTimeStampValueAttribute);
-        AttributeRule invocationTimeStampRule = new AttributeRule(1000000, new RandomIntInRange(), "invocationTimeStampValue", invocationTimeStampValue);
+        AttributeRule invocationTimeStampRule = new AttributeRule(1000000, new RandomIntInRange(), "invocationTimeStampValueAttribute", invocationTimeStampValue);
 
 
         //invocationTime
         Attribute invocationTimeValueAttribute = new Attribute(900, "invocationTimeValueAttribute");
         CMAGTerminalSymbol invocationTimeValue = new CMAGTerminalSymbol("invocationTimeValue", invocationTimeValueAttribute);
-        AttributeRule invocationTimeRule = new AttributeRule(1000, new RandomIntInRange(), "invocationTimeValue", invocationTimeValue);
+        AttributeRule invocationTimeRule = new AttributeRule(1000, new RandomIntInRange(), "invocationTimeValueAttribute", invocationTimeValue);
 
 
         //orderId
         Attribute orderIdValueAttribute = new Attribute(100, "orderIdValueAttribute");
         CMAGTerminalSymbol orderIdValue = new CMAGTerminalSymbol("orderIdValue", orderIdValueAttribute);
-        AttributeRule orderIdValueRule = new AttributeRule(50, new RandomIntInRange(), "orderIdValue", orderIdValue);
+        AttributeRule orderIdRule = new AttributeRule(50, new RandomIntInRange(), "orderIdValueAttribute", orderIdValue);
 
 
         //threadId
@@ -271,15 +275,14 @@ public class JsonCmag {
 
 
         //threadName
-        Attribute threadNameValueAttribute = new Attribute("", "threadNameValueAttribute");
+        Attribute threadNameValueAttribute = new Attribute("\"main\"", "threadNameValueAttribute");
         CMAGTerminalSymbol threadNameValue = new CMAGTerminalSymbol("threadNameValue", threadNameValueAttribute);
-        AttributeRule threadNameRule = new AttributeRule("\"main\"", new AssignString(), "threadNameValue", threadNameValue);
 
 
         //objectHashCode
         Attribute objectHashCodeValueAttribute = new Attribute(1735853116, "objectHashCodeValueAttribute");
         CMAGTerminalSymbol objectHashCodeValue = new CMAGTerminalSymbol("objectHashCodeValue", objectHashCodeValueAttribute);
-        AttributeRule objectHashCodeRule = new AttributeRule(10000000, new RandomIntInRange(), "objectHashCodeValue", objectHashCodeValue);
+        AttributeRule objectHashCodeRule = new AttributeRule(10000000, new RandomIntInRange(), "objectHashCodeValueAttribute", objectHashCodeValue);
 
 
     //Production Rules
@@ -296,9 +299,10 @@ public class JsonCmag {
         //Rule 4
         List<AbstractSymbol> jsonObjectBody= new ArrayList<>();
 
+        //rulebody
         jsonObjectBody.add(openJsonObject);
         jsonObjectBody.addAll(Arrays.asList(className,  colon, classNameValue, comma));
-        jsonObjectBody.addAll(Arrays.asList(methodName,  colon, methodNameValue, comma));
+        jsonObjectBody.addAll(Arrays.asList(methodName,  colon, methodNamePlaceholder, comma));
         jsonObjectBody.addAll(Arrays.asList(inputArgsTypes,  colon, openJsonArray, inputArgsTypesArray, closeJsonArray, comma));
         jsonObjectBody.addAll(Arrays.asList(inputArgs,  colon, openJsonArray, inputArgsArray, closeJsonArray, comma));
         jsonObjectBody.addAll(Arrays.asList(returnValueBranch, comma));
@@ -310,7 +314,12 @@ public class JsonCmag {
         jsonObjectBody.addAll(Arrays.asList(objectHashCode,  colon, objectHashCodeValue));
         jsonObjectBody.add(closeJsonObject);
 
-        CMAGProduction rule4 = new CMAGProduction(jsonObject, jsonObjectBody);
+        //All attribute rules for the production
+        List<AttributeRule> rule3attributeRules = new ArrayList<>();
+        rule3attributeRules.addAll(Arrays.asList(orderIdRule, invocationTimeStampRule, invocationTimeRule, objectHashCodeRule));
+
+
+        CMAGProduction rule4 = new CMAGProduction(jsonObject, jsonObjectBody, new ArrayList<>(), rule3attributeRules);
 
         //Rule 5
         CMAGProduction rule5 = new CMAGProduction(methodNamePlaceholder, Collections.singletonList(methodNameValue), new ArrayList<>(), methodNameRule);
@@ -364,21 +373,19 @@ public class JsonCmag {
         CMAGProduction rule21 = new CMAGProduction(inputArgsValuePlaceholder, Collections.singletonList(inputArgsValue), new ArrayList<>(), inputArgsRule7);
 
         //Rule 22
-        CMAGProduction rule22 = new CMAGProduction(returnValueBranch, Arrays.asList(returnValueType,  colon, returnValueType_Value, comma), new ArrayList<>(), returnValueType_Rule);
+        CMAGProduction rule22 = new CMAGProduction(returnValueBranch, Arrays.asList(returnValueType, colon, returnValueType_Value), new ArrayList<>(), returnValueType_Rule);
 
         //Rule 23
-        CMAGProduction rule23 = new CMAGProduction(returnValueBranch, Arrays.asList(returnValueType,  colon, returnValueType_Value, comma, returnValue,  colon, returnValue_ValueInt, comma), new ArrayList<>(), Arrays.asList(returnValueRule, returnValueType_Rule2));
+        CMAGProduction rule23 = new CMAGProduction(returnValueBranch, Arrays.asList(returnValueType, colon, returnValueType_Value, comma, returnValue, colon, returnValue_ValueInt), new ArrayList<>(), Arrays.asList(returnValueRule, returnValueType_Rule2));
 
         //Rule 24
-        CMAGProduction rule24 = new CMAGProduction(returnValueBranch, Arrays.asList(returnValueType,  colon, returnValueType_Value, comma, returnValue,  colon, openJsonArray, returnValueArray, closeJsonArray, comma), new ArrayList<>(), returnValueType_Rule3);
+        CMAGProduction rule24 = new CMAGProduction(returnValueBranch, Arrays.asList(returnValueType, colon, returnValueType_Value, comma, returnValue, colon, openJsonArray, returnValueArray, closeJsonArray), new ArrayList<>(), returnValueType_Rule3);
 
         //Rule 25
         CMAGProduction rule25 = new CMAGProduction(returnValueArray, Arrays.asList(returnValue_ValueCollection, comma, returnValueArray), new ArrayList<>(), returnValueRule2);
 
         //Rule 26
         CMAGProduction rule26 = new CMAGProduction(returnValueArray, Collections.singletonList(returnValue_ValueCollection), new ArrayList<>(), returnValueRule2);
-
-
 
 
         //Define CMAG
