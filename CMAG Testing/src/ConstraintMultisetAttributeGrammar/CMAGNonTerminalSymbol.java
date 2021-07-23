@@ -1,6 +1,8 @@
 package ConstraintMultisetAttributeGrammar;
 
 import ContextFreeGrammar.CFGNonTerminalSymbol;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,8 +21,14 @@ public class CMAGNonTerminalSymbol extends CMAGSymbol {
         super(object, attribute);
     }
 
+    /**
+     * Method for cloning symbols and their attributes
+     * @return A new instance of the same {@linkplain CMAGSymbol}
+     */
     @Override
-    public CMAGNonTerminalSymbol clone() {
-        return new CMAGNonTerminalSymbol(this.getObject(), this.getAttributes(), this.getId());
+    public CMAGSymbol clone() {
+        List<Attribute> clonedAttributes = new ArrayList<>();
+        this.getAttributes().forEach(attribute -> clonedAttributes.add(attribute.clone()));
+        return new CMAGNonTerminalSymbol(this.getObject(), clonedAttributes, this.getId());
     }
 }

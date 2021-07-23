@@ -47,22 +47,25 @@ public abstract class CMAGSymbol extends CFGSymbol {
     }
 
 
-
+    /**
+     * Returns all attributes of the symbol
+     * @return {@linkplain List} of all {@linkplain Attribute}s
+     */
     public List<Attribute> getAttributes() {
         return attributes;
     }
 
-    public Attribute getAttributeAtPosition(int position){
-        return attributes.get(position);
-    }
-
-    public Attribute getAttributeWithName(String name){
+    /**
+     * Retrieves an attribute with a given name
+     * @param name The name of the {@linkplain Attribute}
+     * @return {@linkplain Attribute}
+     * @throws ClassNotFoundException Thrown if the {@linkplain Attribute} can't be found by that name
+     */
+    public Attribute getAttributeWithName(String name) throws ClassNotFoundException {
         for(Attribute a : attributes){
-            if(a.getName().equals(name)){
-                return a;
-            }
+            if(a.getName().equals(name)) return a;
         }
-        return null;
+        throw new ClassNotFoundException("The Attribute with name: " + name + " was not found");
     }
 
     @Override

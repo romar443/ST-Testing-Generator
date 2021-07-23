@@ -3,6 +3,7 @@ package ConstraintMultisetAttributeGrammar;
 import ContextFreeGrammar.CFGTerminalSymbol;
 import GeneralComponents.AbstractSymbol;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,12 +22,18 @@ public class CMAGTerminalSymbol extends CMAGSymbol {
     }
 
     @Override
-    public CMAGTerminalSymbol clone() {
-        return new CMAGTerminalSymbol(this.getObject(), this.getAttributes(), this.getId());
-    }
-
-    @Override
     public String toString() {
         return super.toString();
+    }
+
+    /**
+     * Method for cloning symbols and their attributes
+     * @return A new instance of the same {@linkplain CMAGSymbol}
+     */
+    @Override
+    public CMAGSymbol clone() {
+        List<Attribute> clonedAttributes = new ArrayList<>();
+        this.getAttributes().forEach(attribute -> clonedAttributes.add(attribute.clone()));
+        return new CMAGTerminalSymbol(this.getObject(), clonedAttributes, this.getId());
     }
 }

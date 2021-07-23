@@ -189,31 +189,11 @@ public class CMAGProduction extends CFGProduction {
             //Introduce a copy of the objects in the rule body, so new attributes may be assigned without altering the attributes from symbols in previous productions
             List<AbstractSymbol> copyOfRuleBody = new ArrayList<>();
 
-
+            //Iterate through all symbols in the rule body
             for (AbstractSymbol ar : getRuleBody()){
 
-
-                //List which will contain new attributes
-                List listOfDuplicateAttributes = new ArrayList();
-
-                if (ar instanceof CMAGTerminalSymbol){
-                    CMAGTerminalSymbol terminalSymbol = (CMAGTerminalSymbol) ar;
-                    for (Attribute oldAttribute : (terminalSymbol.getAttributes())){
-                        listOfDuplicateAttributes.add(oldAttribute.clone());
-
-                        //print the nonterminal
-                        System.out.println(terminalSymbol.toString());
-
-                    }
-                    copyOfRuleBody.add(ar.clone());
-                }
-                else {
-                    for (Attribute oldAttribute : ((CMAGNonTerminalSymbol) ar).getAttributes()){
-                        listOfDuplicateAttributes.add(oldAttribute.clone());
-
-                    }
-                    copyOfRuleBody.add(ar.clone());
-                }
+                //
+                copyOfRuleBody.add(ar.clone());
             }
 
 
