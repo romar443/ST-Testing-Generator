@@ -65,7 +65,7 @@ public class Constraint {
      * Returns whether the constraint is fulfilled
      * @return {@linkplain Boolean} indicating the status of the constraint
      */
-    public Boolean getSatisfied(CMAGSymbol leftSymbol, CMAGSymbol rightSymbol){
+    public Boolean getSatisfied(CMAGSymbol leftSymbol, CMAGSymbol rightSymbol) throws ClassNotFoundException {
 
         //Get leftSide attribute
         Attribute leftsideAttribute = leftSymbol.getAttributeWithName(leftsideAttributeName);
