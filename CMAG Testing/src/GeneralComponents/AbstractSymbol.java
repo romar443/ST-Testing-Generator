@@ -8,7 +8,7 @@ import java.util.UUID;
  */
 public abstract class AbstractSymbol<T> {
     /**
-     * The underlying object. Can be an instance of the {@linkplain StartSymbol}, a <b>letter</b> of the <b>alphabet</b> or a <b>sentence</b>
+     * The underlying object. Can be an instance of a <b>letter</b> of the <b>alphabet</b> or a <b>sentence</b>
      */
     private final T object;
 
