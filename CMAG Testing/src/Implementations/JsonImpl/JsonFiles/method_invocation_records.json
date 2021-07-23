@@ -147,6 +147,16 @@
         "threadName":"main",
         "objectHashCode":0
     },
+
+
+
+
+
+
+
+
+
+    
     {
         "className":"chatty.util.settings.Setting",
         "methodName":"copyCollection",
