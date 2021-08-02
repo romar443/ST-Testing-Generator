@@ -2,14 +2,9 @@ package Implementations.Basics;
 
 import ConstraintMultisetAttributeGrammar.*;
 import GeneralComponents.AbstractSymbol;
-import GeneralComponents.Operators.ArithmeticOperators.Multiplication;
-import GeneralComponents.Operators.BooleanOperators.EqualTo;
+import GeneralComponents.Operators.ArithmeticIntegerOperators.Multiplication;
 import GeneralComponents.Operators.BooleanOperators.GreaterThan;
-import GeneralComponents.Operators.BooleanOperators.NotEqualTo;
-import GeneralComponents.Operators.BooleanOperators.SmallerThan;
-import GeneralComponents.Operators.StringOperators.AssignString;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
