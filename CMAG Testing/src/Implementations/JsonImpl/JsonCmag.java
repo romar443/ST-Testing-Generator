@@ -2,7 +2,8 @@ package Implementations.JsonImpl;
 
 import ConstraintMultisetAttributeGrammar.*;
 import GeneralComponents.AbstractSymbol;
-import GeneralComponents.Operators.ArithmeticOperators.RandomIntInRange;
+import GeneralComponents.Operators.ArithmeticIntegerOperators.RandomIntInRange;
+import GeneralComponents.Operators.ArithmeticLongOperators.RandomLongInRange;
 import GeneralComponents.Operators.StringOperators.AssignString;
 
 import java.util.ArrayList;
@@ -252,9 +253,9 @@ public class JsonCmag {
 
 
         //invocationTimeStamp
-        Attribute invocationTimeStampValueAttribute = new Attribute(6000000, "invocationTimeStampValueAttribute");
+        Attribute invocationTimeStampValueAttribute = new Attribute(61504673324248L, "invocationTimeStampValueAttribute");
         CMAGTerminalSymbol invocationTimeStampValue = new CMAGTerminalSymbol("invocationTimeStampValue", invocationTimeStampValueAttribute);
-        AttributeRule invocationTimeStampRule = new AttributeRule(1000000, new RandomIntInRange(), "invocationTimeStampValueAttribute", invocationTimeStampValue);
+        AttributeRule invocationTimeStampRule = new AttributeRule(10000000L, new RandomLongInRange(), "invocationTimeStampValueAttribute", invocationTimeStampValue);
 
 
         //invocationTime
@@ -280,9 +281,9 @@ public class JsonCmag {
 
 
         //objectHashCode
-        Attribute objectHashCodeValueAttribute = new Attribute(1735853116, "objectHashCodeValueAttribute");
+        Attribute objectHashCodeValueAttribute = new Attribute(967765295L, "objectHashCodeValueAttribute");
         CMAGTerminalSymbol objectHashCodeValue = new CMAGTerminalSymbol("objectHashCodeValue", objectHashCodeValueAttribute);
-        AttributeRule objectHashCodeRule = new AttributeRule(10000000, new RandomIntInRange(), "objectHashCodeValueAttribute", objectHashCodeValue);
+        AttributeRule objectHashCodeRule = new AttributeRule(50000000L, new RandomLongInRange(), "objectHashCodeValueAttribute", objectHashCodeValue);
 
 
     //Production Rules
