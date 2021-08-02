@@ -2,7 +2,7 @@ package Implementations.CarImpl;
 
 import ConstraintMultisetAttributeGrammar.*;
 import GeneralComponents.AbstractSymbol;
-import GeneralComponents.Operators.ArithmeticOperators.Addition;
+import GeneralComponents.Operators.ArithmeticIntegerOperators.Addition;
 import GeneralComponents.Operators.BooleanOperators.EqualTo;
 import GeneralComponents.Operators.BooleanOperators.NotEqualTo;
 import GeneralComponents.Operators.StringOperators.AssignString;

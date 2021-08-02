@@ -1,7 +1,6 @@
 package GeneralComponents.Operators.StringOperators;
 
 import ConstraintMultisetAttributeGrammar.Attribute;
-import GeneralComponents.Operators.AbstractArithmeticOperator;
 import GeneralComponents.Operators.AbstractStringOperator;
 
 /**

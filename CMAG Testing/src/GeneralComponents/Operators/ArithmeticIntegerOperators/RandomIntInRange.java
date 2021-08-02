@@ -1,13 +1,13 @@
-package GeneralComponents.Operators.ArithmeticOperators;
+package GeneralComponents.Operators.ArithmeticIntegerOperators;
 
 import ConstraintMultisetAttributeGrammar.Attribute;
-import GeneralComponents.Operators.AbstractArithmeticOperator;
+import GeneralComponents.Operators.AbstractArithmeticIntegerOperator;
 
 /**
  * Arithmetic Operation
  * Return a random integer in a range, given a starting value
  */
-public class RandomIntInRange extends AbstractArithmeticOperator{
+public class RandomIntInRange extends AbstractArithmeticIntegerOperator {
 
     /**
      * Returns a random integer within a range, where a1 denotes the range and a2 is the starting value

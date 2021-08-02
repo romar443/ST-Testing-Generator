@@ -3,7 +3,6 @@ package ConstraintMultisetAttributeGrammar;
 import GeneralComponents.AbstractOperator;
 import GeneralComponents.AbstractSymbol;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -18,7 +17,7 @@ import java.util.UUID;
 public class AttributeRule {
 
     /**
-     * The operation itself, which must be a concrete instance of an operator e.g. {@linkplain GeneralComponents.Operators.ArithmeticOperators.Addition} for integers.
+     * The operation itself, which must be a concrete instance of an operator e.g. {@linkplain GeneralComponents.Operators.ArithmeticIntegerOperators.Addition} for integers.
      */
     private AbstractOperator operation;
     /**
