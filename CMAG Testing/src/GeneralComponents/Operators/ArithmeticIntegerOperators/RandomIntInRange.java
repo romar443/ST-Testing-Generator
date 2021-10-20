@@ -13,7 +13,7 @@ public class RandomIntInRange extends AbstractArithmeticIntegerOperator {
      * Returns a random integer within a range, where a1 denotes the range and a2 is the starting value
      * @param a1 The given range from which to vary
      * @param a2 The base value from which to vary from
-     * @return
+     * @return Random int in range
      */
     @Override
     public Integer getResult(Attribute a1, Attribute a2) {

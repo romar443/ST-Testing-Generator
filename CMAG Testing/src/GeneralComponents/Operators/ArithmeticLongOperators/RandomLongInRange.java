@@ -13,7 +13,7 @@ public class RandomLongInRange extends AbstractArithmeticLongOperator {
      * Returns a random Long within a range, where a1 denotes the range and a2 is the starting value
      * @param a1 The given range from which to vary
      * @param a2 The base value from which to vary from
-     * @return
+     * @return random long in range
      */
     @Override
     public Long getResult(Attribute a1, Attribute a2) {
@@ -21,8 +21,15 @@ public class RandomLongInRange extends AbstractArithmeticLongOperator {
         //Try catch loop in case of failed casting
         try {
             //Cast the value of the attributes to Long
-            var i1 = (Long) a1.getValue();
-            var i2 = (Long) a2.getValue();
+            var l1 = (Long) a1.getValue();
+            var l2 = (Long) a2.getValue();
+
+            //convert to int
+            var i1 = l1.intValue();
+            var i2 = l2.intValue();
+
+            System.out.println("i1: " + i1);
+            System.out.println("i2: " + i2);
 
             //Find maximum bound
             var max = i2 + i1/2;
@@ -34,6 +41,8 @@ public class RandomLongInRange extends AbstractArithmeticLongOperator {
 
             //Return random Long result
             Double result = ((Math.random() * (max - min)) + min);
+
+            System.out.println("result: " + result);
             return (result).longValue();
 
         }

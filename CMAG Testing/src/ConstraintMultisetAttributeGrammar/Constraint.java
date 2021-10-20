@@ -14,9 +14,6 @@ import java.util.UUID;
  */
 public class Constraint {
 
-    /**
-     * The {@linkplain #operator} must be a boolean operation, as a constraint is either fulfilled or not.
-     */
     private AbstractBooleanOperator operator;
     private UUID leftSymbolId;
     private UUID rightSymbolId;
@@ -73,7 +70,7 @@ public class Constraint {
         //If the constraint is evaluated upon the value of two attributes:
         if(Objects.equals(constantFlag, false)){
 
-            Attribute rightsideAttribute = leftSymbol.getAttributeWithName(rightsideAttributeName);
+            Attribute rightsideAttribute = rightSymbol.getAttributeWithName(rightsideAttributeName);
 
             return operator.getResult(leftsideAttribute, rightsideAttribute);
         }
