@@ -28,9 +28,6 @@ public class RandomLongInRange extends AbstractArithmeticLongOperator {
             var i1 = l1.intValue();
             var i2 = l2.intValue();
 
-            System.out.println("i1: " + i1);
-            System.out.println("i2: " + i2);
-
             //Find maximum bound
             var max = i2 + i1/2;
             max = Math.round(max);
@@ -42,7 +39,6 @@ public class RandomLongInRange extends AbstractArithmeticLongOperator {
             //Return random Long result
             Double result = ((Math.random() * (max - min)) + min);
 
-            System.out.println("result: " + result);
             return (result).longValue();
 
         }
